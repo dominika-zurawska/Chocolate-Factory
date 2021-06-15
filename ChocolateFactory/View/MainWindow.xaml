@@ -1,0 +1,84 @@
+﻿<Window x:Class="ChocolateFactory.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ChocolateFactory"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="500" Width="800">
+    <Grid>
+        <TabControl>
+            <TabItem Header="Zamówienie">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Orientation="Horizontal">
+                        <StackPanel Orientation="Vertical">
+                            <Label Content="Kontrahent" Width="100" Height="30" Margin="0,10"></Label>
+                            <Label Content="Produkt" Width="100" Height="30" Margin="0,10"></Label>
+                            <Label Content="Ilość" Width="100" Height="30" Margin="0,10"></Label>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <ComboBox Name="CbContractor" Height="30" Margin="0,10" FontSize="17"></ComboBox>
+                            <ComboBox Name="CbProduct" Height="30" Margin="0,10" FontSize="17"></ComboBox>
+                            <StackPanel Orientation="Horizontal" Width="220">
+                                <Slider Name="sQuantity"  Width="170" Height="30" Margin="0,10" Minimum="0" Maximum="999" ValueChanged="sQuantity_ValueChanged"></Slider>
+                                <Label Name="lblQuantity" Content="0" Margin="0,5"></Label>
+                                <Label Content="j.m." Margin="0,5"></Label>
+                            </StackPanel>
+
+                            <Button Name="btnAdd" Content="Dodaj pozycję" Margin="0,10" Click="btnAdd_Click" ></Button>
+                            <Button Name="btnEdit" Content="Edytuj pozycję" Margin="0,10" Click="btnEdit_Click"></Button>
+                            <Button Name="btnDelete" Content="Usuń pozycję" Margin="0,10" Click="btnDelete_Click"></Button>
+                            <Button Name="btnSubmitOrder" Content="Złóż zamówienie" Margin="0,10" Click="btnSubmitOrder_Click"></Button>
+                            <StackPanel>
+                                <Button Content="EditSave" Width="110" Margin="0,0,10,0"  Name="btnSaveEdit" Visibility="Hidden"></Button>
+                                <Button Content="Cancel" Width="110"  Name="btnCancelEdit" Visibility="Hidden"></Button>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1">
+                        <ListView Name="lvPostions" Width="350" Height="370" Margin="0,10">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Header="Nazwa"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=MeasureUnit}" Header="j.m."/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Quantity}" Header="Ilość"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Price}" Header="Cena"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Suma:" Margin="20,0, 200,0"></Label>
+                            <Label Content="cała kwota"></Label>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Historia zamówień">
+                <Grid>
+                    <StackPanel Orientation="Vertical">
+                        <ListView Name="lvOrders" Width="550" Height="370" Margin="0,10">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Number}" Header="Numer"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Contractor}" Header="Kontrahent"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=OrderDate}" Header="Data"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button x:Name="btnDetails" Content="Podgląd zamówienia" Margin="10,0"></Button>
+                            <Button Name="btnRepeat" Content="Ponów zamówienie" Margin="10,0"></Button>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+
+    </Grid>
+</Window>

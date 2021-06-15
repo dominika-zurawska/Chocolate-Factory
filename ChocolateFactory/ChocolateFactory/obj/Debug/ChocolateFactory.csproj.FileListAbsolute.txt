@@ -1,0 +1,15 @@
+D:\Korepetycje\WPF\Dominika\ChocolateFactory\ChocolateFactory\obj\Debug\App.g.cs
+D:\Korepetycje\WPF\Dominika\ChocolateFactory\ChocolateFactory\obj\Debug\ChocolateFactory_MarkupCompile.cache
+D:\Korepetycje\WPF\Dominika\ChocolateFactory\ChocolateFactory\obj\Debug\ChocolateFactory_MarkupCompile.lref
+D:\Korepetycje\WPF\Dominika\ChocolateFactory\ChocolateFactory\bin\Debug\ChocolateFactory.exe.config
+D:\Korepetycje\WPF\Dominika\ChocolateFactory\ChocolateFactory\bin\Debug\ChocolateFactory.exe
+D:\Korepetycje\WPF\Dominika\ChocolateFactory\ChocolateFactory\bin\Debug\ChocolateFactory.pdb
+D:\Korepetycje\WPF\Dominika\ChocolateFactory\ChocolateFactory\obj\Debug\ChocolateFactory.g.resources
+D:\Korepetycje\WPF\Dominika\ChocolateFactory\ChocolateFactory\obj\Debug\ChocolateFactory.Properties.Resources.resources
+D:\Korepetycje\WPF\Dominika\ChocolateFactory\ChocolateFactory\obj\Debug\ChocolateFactory.csproj.GenerateResource.cache
+D:\Korepetycje\WPF\Dominika\ChocolateFactory\ChocolateFactory\obj\Debug\ChocolateFactory.csproj.CoreCompileInputs.cache
+D:\Korepetycje\WPF\Dominika\ChocolateFactory\ChocolateFactory\obj\Debug\ChocolateFactory.exe
+D:\Korepetycje\WPF\Dominika\ChocolateFactory\ChocolateFactory\obj\Debug\ChocolateFactory.pdb
+D:\Korepetycje\WPF\Dominika\ChocolateFactory\ChocolateFactory\obj\Debug\ChocolateFactory.csprojAssemblyReference.cache
+D:\Korepetycje\WPF\Dominika\ChocolateFactory\ChocolateFactory\obj\Debug\View\MainWindow.g.cs
+D:\Korepetycje\WPF\Dominika\ChocolateFactory\ChocolateFactory\obj\Debug\View\MainWindow.baml
