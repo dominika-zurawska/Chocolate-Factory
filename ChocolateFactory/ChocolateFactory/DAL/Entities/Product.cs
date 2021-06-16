@@ -71,6 +71,11 @@ namespace ChocolateFactory.DAL.Entities
             return true;
         }
 
+        override public string ToString()
+        {
+            return $"{Name}";
+        }
+
         public override int GetHashCode()
         {
             return base.GetHashCode();

@@ -3,10 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:ChocolateFactory.ViewModel"
         xmlns:local="clr-namespace:ChocolateFactory"
         mc:Ignorable="d"
         Title="MainWindow" Height="500" Width="800">
-    <Grid>
+
+    <Window.Resources>
+        <vm:MainViewModel x:Key="mainVM"/>
+    </Window.Resources>
+
+    <Grid DataContext="{StaticResource mainVM}">
         <TabControl>
             <TabItem Header="Zamówienie">
                 <Grid>
@@ -21,8 +27,14 @@
                             <Label Content="Ilość" Width="100" Height="30" Margin="0,10"></Label>
                         </StackPanel>
                         <StackPanel Orientation="Vertical">
-                            <ComboBox Name="CbContractor" Height="30" Margin="0,10" FontSize="17"></ComboBox>
-                            <ComboBox Name="CbProduct" Height="30" Margin="0,10" FontSize="17"></ComboBox>
+                            <ComboBox Name="CbContractor" Height="30" Margin="0,10" FontSize="17"
+                                      ItemsSource="{Binding TabOrderVM.Contractors, Mode=TwoWay}"
+                                      >
+                            </ComboBox>
+                            <ComboBox Name="CbProduct" Height="30" Margin="0,10" FontSize="17"
+                                      ItemsSource="{Binding TabOrderVM.Products, Mode=TwoWay}"
+                                      >
+                            </ComboBox>
                             <StackPanel Orientation="Horizontal" Width="220">
                                 <Slider Name="sQuantity"  Width="170" Height="30" Margin="0,10" Minimum="0" Maximum="999" ValueChanged="sQuantity_ValueChanged"></Slider>
                                 <Label Name="lblQuantity" Content="0" Margin="0,5"></Label>
@@ -41,7 +53,8 @@
                     </StackPanel>
 
                     <StackPanel Grid.Column="1">
-                        <ListView Name="lvPostions" Width="350" Height="370" Margin="0,10">
+                        <ListView Name="lvPostions" Width="350" Height="370" Margin="0,10"
+>
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Header="Nazwa"/>
@@ -61,7 +74,8 @@
             <TabItem Header="Historia zamówień">
                 <Grid>
                     <StackPanel Orientation="Vertical">
-                        <ListView Name="lvOrders" Width="550" Height="370" Margin="0,10">
+                        <ListView Name="lvOrders" Width="550" Height="370" Margin="0,10"
+                                  ItemsSource="{Binding TabOrdersHistoryVM.Orders}">
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=Number}" Header="Numer"/>

@@ -56,6 +56,11 @@ namespace ChocolateFactory.DAL.Entities
             return $"('{Name}', '{NIP}')";
         }
 
+        override public string ToString()
+        {
+            return $"{Name}";
+        }
+
         public override bool Equals(object obj)
         {
             var contractor = obj as Contractor;
