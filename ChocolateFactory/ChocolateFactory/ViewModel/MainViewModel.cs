@@ -9,6 +9,8 @@ namespace ChocolateFactory.ViewModel
     using ChocolateFactory.Model;
     using BaseClass;
     using DAL;
+    using System.Windows.Input;
+
     class MainViewModel
     {
         //creating an instance of the model

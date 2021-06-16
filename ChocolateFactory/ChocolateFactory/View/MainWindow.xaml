@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:ChocolateFactory.ViewModel"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:local="clr-namespace:ChocolateFactory"
         mc:Ignorable="d"
         Title="MainWindow" Height="500" Width="800">
@@ -29,19 +30,25 @@
                         <StackPanel Orientation="Vertical">
                             <ComboBox Name="CbContractor" Height="30" Margin="0,10" FontSize="17"
                                       ItemsSource="{Binding TabOrderVM.Contractors, Mode=TwoWay}"
+                                      SelectedItem="{Binding TabOrderVM.SelectedContractor}"
                                       >
                             </ComboBox>
                             <ComboBox Name="CbProduct" Height="30" Margin="0,10" FontSize="17"
                                       ItemsSource="{Binding TabOrderVM.Products, Mode=TwoWay}"
+                                      SelectedItem="{Binding TabOrderVM.SelectedProduct}"
                                       >
                             </ComboBox>
                             <StackPanel Orientation="Horizontal" Width="220">
-                                <Slider Name="sQuantity"  Width="170" Height="30" Margin="0,10" Minimum="0" Maximum="999" ValueChanged="sQuantity_ValueChanged"></Slider>
+                                <Slider Name="sQuantity"  Width="170" Height="30" Margin="0,10" Minimum="0" Maximum="999" ValueChanged="sQuantity_ValueChanged"
+                                        
+                                        >
+                                    
+                                </Slider>
                                 <Label Name="lblQuantity" Content="0" Margin="0,5"></Label>
                                 <Label Content="j.m." Margin="0,5"></Label>
                             </StackPanel>
 
-                            <Button Name="btnAdd" Content="Dodaj pozycję" Margin="0,10" Click="btnAdd_Click" ></Button>
+                            <Button Name="btnAdd" Content="Dodaj pozycję" Margin="0,10" Command="{Binding TabOrderVM.AddProductToList}" ></Button>
                             <Button Name="btnEdit" Content="Edytuj pozycję" Margin="0,10" Click="btnEdit_Click"></Button>
                             <Button Name="btnDelete" Content="Usuń pozycję" Margin="0,10" Click="btnDelete_Click"></Button>
                             <Button Name="btnSubmitOrder" Content="Złóż zamówienie" Margin="0,10" Click="btnSubmitOrder_Click"></Button>
@@ -54,15 +61,24 @@
 
                     <StackPanel Grid.Column="1">
                         <ListView Name="lvPostions" Width="350" Height="370" Margin="0,10"
->
+                                  ItemsSource="{Binding TabOrderVM.ProductsList}"
+                                  SelectedIndex="{Binding TabOrderVM.ProductsListSelectedIndex}"
+                                  >
+
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Header="Nazwa"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=MeasureUnit}" Header="j.m."/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Unit}" Header="j.m."/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=Quantity}" Header="Ilość"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Price}" Header="Cena"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=PricePerUnit}" Header="Cena"/>
                                 </GridView>
                             </ListView.View>
+
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction Command="{Binding TabOrderVM.LoadForm}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
                         </ListView>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Suma:" Margin="20,0, 200,0"></Label>
@@ -78,8 +94,8 @@
                                   ItemsSource="{Binding TabOrdersHistoryVM.Orders}">
                             <ListView.View>
                                 <GridView>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Number}" Header="Numer"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Contractor}" Header="Kontrahent"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Id}" Header="Numer"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=IdContractor}" Header="Kontrahent"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=OrderDate}" Header="Data"/>
                                 </GridView>
                             </ListView.View>

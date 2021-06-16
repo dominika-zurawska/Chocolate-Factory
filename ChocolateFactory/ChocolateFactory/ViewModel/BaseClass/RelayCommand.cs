@@ -7,38 +7,43 @@ using System.Windows.Input;
 
 namespace ChocolateFactory.ViewModel.BaseClass
 {
+
     class RelayCommand : ICommand
     {
-        public event EventHandler CanExecuteChanged
-        {
-            add
-            {
-                if (canExecute != null) CommandManager.RequerySuggested += value;
-            }
-            remove
-            {
-                if (canExecute != null) CommandManager.RequerySuggested -= value;
-            }
-        }
+        readonly Action<object> _execute;
 
-        private Action<object> execute;
-        private Predicate<object> canExecute;
+        readonly Predicate<object> _canExecute;
 
         public RelayCommand(Action<object> execute, Predicate<object> canExecute)
         {
-            this.execute = execute;
-            this.canExecute = canExecute;
+            if (execute == null)
+                throw new ArgumentNullException(nameof(execute));
+            else
+                _execute = execute;
+            _canExecute = canExecute;
         }
 
         public bool CanExecute(object parameter)
         {
+            return _canExecute == null ? true : _canExecute(parameter);
+        }
 
-            return canExecute == null ? true : canExecute(parameter);
+        public event EventHandler CanExecuteChanged
+        {
+            add
+            {
+                if (_canExecute != null) CommandManager.RequerySuggested += value;
+            }
+            remove
+            {
+                if (_canExecute != null) CommandManager.RequerySuggested -= value;
+            }
         }
 
         public void Execute(object parameter)
         {
-            execute(parameter);
+            _execute(parameter);
         }
+
     }
 }
