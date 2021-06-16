@@ -3,8 +3,9 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
-# Settings with database credentials
+# Settings with database credentials and structure
 **/Properties/Settings.*
+**/Properties/DBTablesNames/*
 
 # User-specific files
 *.rsuser
