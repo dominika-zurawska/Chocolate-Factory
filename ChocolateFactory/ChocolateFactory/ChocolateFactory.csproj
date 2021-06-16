@@ -112,13 +112,14 @@
     <Compile Include="DAL\Entities\Order.cs" />
     <Compile Include="DAL\Entities\OrderedProduct.cs" />
     <Compile Include="DAL\Entities\Product.cs" />
+    <Compile Include="DAL\Repositories\RepositoryOrderedProducts.cs" />
+    <Compile Include="DAL\Repositories\RepositoryProducts.cs" />
+    <Compile Include="DAL\Repositories\RepositoryContractors.cs" />
+    <Compile Include="DAL\Repositories\RepositoryAddresses.cs" />
     <Compile Include="DAL\Repositories\RepositoryOrders.cs" />
-    <Compile Include="Model\Address.cs" />
-    <Compile Include="Model\Contractor.cs" />
-    <Compile Include="Model\Order.cs" />
+    <Compile Include="Model\MainModel.cs" />
     <Compile Include="Model\OrderManager.cs" />
     <Compile Include="Model\OrderPosition.cs" />
-    <Compile Include="Model\Product.cs" />
     <Compile Include="Model\StockLevel.cs" />
     <Compile Include="Properties\DBTablesNames\Addresses.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -147,6 +148,9 @@
     </Compile>
     <Compile Include="ViewModel\BaseClass\BaseViewModel.cs" />
     <Compile Include="ViewModel\BaseClass\RelayCommand.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\TabOrdersHistoryViewModel.cs" />
+    <Compile Include="ViewModel\TabOrderViewModel.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

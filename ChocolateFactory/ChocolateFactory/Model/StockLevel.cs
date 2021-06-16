@@ -8,12 +8,12 @@ namespace ChocolateFactory.Model
 {
     public class StockLevel
     {
-        public Product Product { get; set; }
-        public int ProductQuantity { get; set; }
-        public StockLevel(Product product, int productQuantity)
-        {
-            Product = product;
-            ProductQuantity = productQuantity;
-        }
+        //public Product Product { get; set; }
+        //public int ProductQuantity { get; set; }
+        //public StockLevel(Product product, int productQuantity)
+        //{
+        //    Product = product;
+        //    ProductQuantity = productQuantity;
+        //}
     }
 }

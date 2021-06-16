@@ -8,11 +8,11 @@ namespace ChocolateFactory.Model
 {
     public class OrderManager
     {
-        public void AddPosition(Product product, int quantity)
-        {
-            var orderPosition = new OrderPosition(product, quantity);
+        //public void AddPosition(Product product, int quantity)
+        //{
+            //var orderPosition = new OrderPosition(product, quantity);
             //dodanie do bazy danych
-        }
+        //}
         
         public void DeletePosition(Guid orderId)
         {
@@ -25,11 +25,11 @@ namespace ChocolateFactory.Model
             
         }
 
-        public void SubmitOrder(Contractor contractor, List<OrderPosition> orderPositions, decimal amount)
-        {
-            var order = new Order(contractor, orderPositions, amount);
+        //public void SubmitOrder(Contractor contractor, List<OrderPosition> orderPositions, decimal amount)
+        //{
+            //var order = new Order(contractor, orderPositions, amount);
             //zapis do bazy danych
-        }
+        //}
 
         public void ShowDetails(Guid orderId)
         {
