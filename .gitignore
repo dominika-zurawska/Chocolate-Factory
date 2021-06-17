@@ -6,6 +6,7 @@
 # Settings with database credentials and structure
 **/Properties/Settings.*
 **/Properties/DBTablesNames/*
+**/App.config
 
 # User-specific files
 *.rsuser

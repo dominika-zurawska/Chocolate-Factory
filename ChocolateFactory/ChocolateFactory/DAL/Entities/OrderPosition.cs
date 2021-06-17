@@ -7,7 +7,7 @@ using MySql.Data.MySqlClient;
 
 namespace ChocolateFactory.DAL.Entities
 {
-    class OrderedProduct
+    class OrderPosition
     {
 
         #region Attributes
@@ -22,16 +22,16 @@ namespace ChocolateFactory.DAL.Entities
         #region Constructors
 
         // creating an object based on MySqlDataReader
-        public OrderedProduct(MySqlDataReader reader)
+        public OrderPosition(MySqlDataReader reader)
         {
-            Id = sbyte.Parse(reader[Properties.DBTablesNames.OrderedProducts.Id].ToString());
-            IdOrder = sbyte.Parse(reader[Properties.DBTablesNames.OrderedProducts.Order].ToString());
-            IdProduct = sbyte.Parse(reader[Properties.DBTablesNames.OrderedProducts.Product].ToString());
-            Quantity = int.Parse(reader[Properties.DBTablesNames.OrderedProducts.Quantity].ToString());
+            Id = sbyte.Parse(reader[Properties.DBTablesNames.OrderPositions.Id].ToString());
+            IdOrder = sbyte.Parse(reader[Properties.DBTablesNames.OrderPositions.Order].ToString());
+            IdProduct = sbyte.Parse(reader[Properties.DBTablesNames.OrderPositions.Product].ToString());
+            Quantity = int.Parse(reader[Properties.DBTablesNames.OrderPositions.Quantity].ToString());
         }
 
         // creating object not yet added to the database with id = null
-        public OrderedProduct(sbyte idOrder, sbyte idProduct, int quantity)
+        public OrderPosition(sbyte idOrder, sbyte idProduct, int quantity)
         {
             Id = null;
             IdOrder = idOrder;
@@ -39,7 +39,7 @@ namespace ChocolateFactory.DAL.Entities
             Quantity = quantity;
         }
 
-        public OrderedProduct(OrderedProduct orderedProduct)
+        public OrderPosition(OrderPosition orderedProduct)
         {
             Id = orderedProduct.Id;
             IdOrder = orderedProduct.IdOrder;
@@ -58,7 +58,7 @@ namespace ChocolateFactory.DAL.Entities
 
         public override bool Equals(object obj)
         {
-            var orderedProduct = obj as OrderedProduct;
+            var orderedProduct = obj as OrderPosition;
             if (orderedProduct is null) return false;
             if (Quantity != orderedProduct.Quantity) return false;
             return true;

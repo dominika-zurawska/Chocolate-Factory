@@ -120,9 +120,9 @@
     <Compile Include="DAL\Entities\Address.cs" />
     <Compile Include="DAL\Entities\Contractor.cs" />
     <Compile Include="DAL\Entities\Order.cs" />
-    <Compile Include="DAL\Entities\OrderedProduct.cs" />
+    <Compile Include="DAL\Entities\OrderPosition.cs" />
     <Compile Include="DAL\Entities\Product.cs" />
-    <Compile Include="DAL\Repositories\RepositoryOrderedProducts.cs" />
+    <Compile Include="DAL\Repositories\RepositoryOrderPositions.cs" />
     <Compile Include="DAL\Repositories\RepositoryProducts.cs" />
     <Compile Include="DAL\Repositories\RepositoryContractors.cs" />
     <Compile Include="DAL\Repositories\RepositoryAddresses.cs" />
@@ -140,10 +140,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Contractors.resx</DependentUpon>
     </Compile>
-    <Compile Include="Properties\DBTablesNames\OrderedProducts.Designer.cs">
+    <Compile Include="Properties\DBTablesNames\OrderPositions.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>OrderedProducts.resx</DependentUpon>
+      <DependentUpon>OrderPositions.resx</DependentUpon>
     </Compile>
     <Compile Include="Properties\DBTablesNames\Orders.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -191,9 +191,9 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Contractors.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\DBTablesNames\OrderedProducts.resx">
+    <EmbeddedResource Include="Properties\DBTablesNames\OrderPositions.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>OrderedProducts.Designer.cs</LastGenOutput>
+      <LastGenOutput>OrderPositions.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\DBTablesNames\Orders.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

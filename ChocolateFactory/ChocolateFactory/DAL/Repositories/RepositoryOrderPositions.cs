@@ -9,16 +9,16 @@ namespace ChocolateFactory.DAL.Repositories
 {
     using Entities;
 
-    static class RepositoryOrderedProducts
+    static class RepositoryOrderPositions
     {
         #region Queries
 
         #endregion
 
         #region CRUD
-        public static List<OrderedProduct> GetOrderedProducts(sbyte idOrder)
+        public static List<OrderPosition> GetOrderedProducts(sbyte idOrder)
         {
-            List<OrderedProduct> orderedProducts = new List<OrderedProduct>();
+            List<OrderPosition> orderedProducts = new List<OrderPosition>();
             using (var connection = DBConnection.Instance.Connection)
             {
                 string ALL_ORDERED_PRODUCTS = $"SELECT * FROM ordered_products WHERE id_order={idOrder}";
@@ -27,7 +27,7 @@ namespace ChocolateFactory.DAL.Repositories
                 connection.Open();
                 var reader = command.ExecuteReader();
                 while (reader.Read())
-                    orderedProducts.Add(new OrderedProduct(reader));
+                    orderedProducts.Add(new OrderPosition(reader));
                 connection.Close();
             }
             return orderedProducts;

@@ -67,8 +67,8 @@ namespace ChocolateFactory.ViewModel
                     openWindowOrderDetails = new RelayCommand(
                         arg =>
                         {
-                            var window = new View.OrderDetails();
-                            window.Show();
+                            var orderDetails = new View.OrderDetails();
+                            orderDetails.Show();
                         },
                         arg => OrderSelectedIndex != -1
                         ) ;

@@ -12,7 +12,7 @@ namespace ChocolateFactory.DAL.Repositories
     static class RepositoryOrders
     {
         #region Queries
-        private const string ALL_ORDERS = "select orders.id, id_contractor, order_date, notes, name from orders join contractors c on c.id = id_contractor order by 1;";
+        private const string ALL_ORDERS = "select orders.id, id_contractor, order_date, notes, amount, name from orders join contractors c on c.id = id_contractor order by 1;";
         private const string INSERT_ORDER = "INSERT INTO `orders`(`id_contractor`, `order_date`, `notes`) VALUES";
 
         #endregion
@@ -55,7 +55,7 @@ namespace ChocolateFactory.DAL.Repositories
             {
                 string UPDATE_ORDER = $"UPDATE orders SET {Properties.DBTablesNames.Orders.Contractor}='{order.IdContractor}', " +
                     $"{Properties.DBTablesNames.Orders.OrderDate}='{order.OrderDate}', " +
-                    $"{Properties.DBTablesNames.Orders.Notes}={order.Notes} WHERE id_o={order.Id}";
+                    $"{Properties.DBTablesNames.Orders.Notes}={order.Notes}', {Properties.DBTablesNames.Orders.Amount}={order.Amount} WHERE id_o={order.Id}";
 
                 MySqlCommand command = new MySqlCommand(UPDATE_ORDER, connection);
                 connection.Open();
