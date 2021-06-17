@@ -91,7 +91,9 @@
                 <Grid>
                     <StackPanel Orientation="Vertical">
                         <ListView Name="lvOrders" Width="550" Height="370" Margin="0,10"
-                                  ItemsSource="{Binding TabOrdersHistoryVM.Orders}">
+                                  ItemsSource="{Binding TabOrdersHistoryVM.Orders}"
+                                  SelectedIndex="{Binding TabOrdersHistoryVM.OrderSelectedIndex}"
+                                  >
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=Id}" Header="Numer"/>
@@ -101,7 +103,12 @@
                             </ListView.View>
                         </ListView>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <Button x:Name="btnDetails" Content="Podgląd zamówienia" Margin="10,0"></Button>
+                            <Button x:Name="btnDetails" Content="Podgląd zamówienia" 
+                                    Margin="10,0"
+                                    Command="{Binding TabOrdersHistoryVM.OpenWindowOrderDetails}"
+                                    >
+                                
+                            </Button>
                             <Button Name="btnRepeat" Content="Ponów zamówienie" Margin="10,0"></Button>
                         </StackPanel>
                     </StackPanel>

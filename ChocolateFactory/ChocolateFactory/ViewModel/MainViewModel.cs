@@ -19,11 +19,13 @@ namespace ChocolateFactory.ViewModel
 
         public TabOrderViewModel TabOrderVM { get; set; }
         public TabOrdersHistoryViewModel TabOrdersHistoryVM { get; set; }
+        public OrderDetailsViewModel OrderDetailsVM { get; set; }
 
         public MainViewModel()
         {
             TabOrderVM = new TabOrderViewModel(model);
             TabOrdersHistoryVM = new TabOrdersHistoryViewModel(model);
+            OrderDetailsVM = new OrderDetailsViewModel(model);
         }
 
     }
