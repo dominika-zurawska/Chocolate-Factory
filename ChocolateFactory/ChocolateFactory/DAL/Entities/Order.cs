@@ -7,6 +7,7 @@ using MySql.Data.MySqlClient;
 
 namespace ChocolateFactory.DAL.Entities
 {
+    using Repositories;
     class Order
     {
 
@@ -16,6 +17,7 @@ namespace ChocolateFactory.DAL.Entities
         public sbyte IdContractor { get; set; }
         public DateTime OrderDate { get; set; }
         public string Notes { get; set; }
+        public string ContractorName { get; set; }
 
         #endregion
 
@@ -28,6 +30,7 @@ namespace ChocolateFactory.DAL.Entities
             IdContractor = sbyte.Parse(reader[Properties.DBTablesNames.Orders.Contractor].ToString());
             OrderDate = DateTime.Parse(reader[Properties.DBTablesNames.Orders.OrderDate].ToString());
             Notes = reader[Properties.DBTablesNames.Orders.Notes].ToString();
+            ContractorName = reader[Properties.DBTablesNames.Contractors.Name].ToString();
         }
 
         // creating object not yet added to the database with id = null

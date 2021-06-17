@@ -95,7 +95,7 @@
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=Id}" Header="Numer"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=IdContractor}" Header="Kontrahent"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=ContractorName}" Header="Kontrahent"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=OrderDate}" Header="Data"/>
                                 </GridView>
                             </ListView.View>

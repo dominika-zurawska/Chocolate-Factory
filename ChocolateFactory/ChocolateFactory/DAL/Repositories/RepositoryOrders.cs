@@ -12,8 +12,8 @@ namespace ChocolateFactory.DAL.Repositories
     static class RepositoryOrders
     {
         #region Queries
-        private const string ALL_ORDERS = "SELECT * FROM orders";
-        private const string INSERT_ORDER = "INSERT INTO `orders`(`id_order`, `id_product`, `notes`) VALUES";
+        private const string ALL_ORDERS = "select orders.id, id_contractor, order_date, notes, name from orders join contractors c on c.id = id_contractor order by 1;";
+        private const string INSERT_ORDER = "INSERT INTO `orders`(`id_contractor`, `order_date`, `notes`) VALUES";
 
         #endregion
 
