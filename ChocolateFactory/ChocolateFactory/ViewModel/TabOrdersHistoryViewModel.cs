@@ -17,16 +17,20 @@ namespace ChocolateFactory.ViewModel
         #region Private components
 
         private MainModel model = null;
-        private ObservableCollection<Order> orders = null;
+        private OrderManager orderManager = null;
 
+        private ObservableCollection<Order> orders = null;
         private int orderSelectedIndex = -1;
 
         #endregion
 
         #region Constructors
-        public TabOrdersHistoryViewModel(MainModel model)
+        public OrderDetailsViewModel OrderDetailsVM { get; set; }
+
+        public TabOrdersHistoryViewModel(MainModel model, OrderManager orderManager)
         {
             this.model = model;
+            this.orderManager = orderManager;
             orders = model.Orders;
         }
         #endregion
@@ -53,7 +57,6 @@ namespace ChocolateFactory.ViewModel
             }
         }
 
-
         #endregion
 
         #region Commands
@@ -67,13 +70,33 @@ namespace ChocolateFactory.ViewModel
                     openWindowOrderDetails = new RelayCommand(
                         arg =>
                         {
+                            OrderDetailsVM = new OrderDetailsViewModel(model, orderManager, (sbyte)orders[OrderSelectedIndex].Id);
+
                             var orderDetails = new View.OrderDetails();
-                            orderDetails.Show();
+                            orderDetails.ShowDialog();
                         },
                         arg => OrderSelectedIndex != -1
                         ) ;
 
                 return openWindowOrderDetails;
+            }
+        }
+
+        private ICommand repeatOrder = null;
+        public ICommand RepeatOrder
+        {
+            get
+            {
+                if (repeatOrder == null)
+                    repeatOrder = new RelayCommand(
+                        arg =>
+                        {
+                            orderManager.RepeatOrder((sbyte)orders[OrderSelectedIndex].Id);
+                        },
+                        arg => OrderSelectedIndex != -1
+                        );
+
+                return repeatOrder;
             }
         }
 

@@ -17,7 +17,6 @@ namespace ChocolateFactory.Model
         public ObservableCollection<Order> Orders { get; set; } = new ObservableCollection<Order>();
         public ObservableCollection<Product> Products { get; set; } = new ObservableCollection<Product>();
 
-
         public MainModel()
         {
             //getting data from database

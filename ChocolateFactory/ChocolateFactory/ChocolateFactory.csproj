@@ -129,7 +129,6 @@
     <Compile Include="DAL\Repositories\RepositoryOrders.cs" />
     <Compile Include="Model\MainModel.cs" />
     <Compile Include="Model\OrderManager.cs" />
-    <Compile Include="Model\OrderPosition.cs" />
     <Compile Include="Properties\DBTablesNames\Addresses.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

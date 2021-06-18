@@ -42,6 +42,7 @@ namespace ChocolateFactory.DAL.Repositories
                 MySqlCommand command = new MySqlCommand(GET_CONTRACTOR, connection);
                 connection.Open();
                 var reader = command.ExecuteReader();
+                while (reader.Read())
                 contractor = new Contractor(reader);
                 connection.Close();
             }

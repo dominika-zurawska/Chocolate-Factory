@@ -16,13 +16,15 @@ namespace ChocolateFactory.DAL.Entities
         public sbyte? Id { get; set; }
         public sbyte IdContractor { get; set; }
         public DateTime OrderDate { get; set; }
-        public string Notes { get; set; }
         public decimal Amount { get; set; }
         public string ContractorName { get; set; }
 
         #endregion
 
         #region Constructors
+        public Order() 
+        {
+        }
 
         // creating an object based on MySqlDataReader
         public Order(MySqlDataReader reader)
@@ -30,18 +32,16 @@ namespace ChocolateFactory.DAL.Entities
             Id = sbyte.Parse(reader[Properties.DBTablesNames.Orders.Id].ToString());
             IdContractor = sbyte.Parse(reader[Properties.DBTablesNames.Orders.Contractor].ToString());
             OrderDate = DateTime.Parse(reader[Properties.DBTablesNames.Orders.OrderDate].ToString());
-            Notes = reader[Properties.DBTablesNames.Orders.Notes].ToString();
             Amount = decimal.Parse(reader[Properties.DBTablesNames.Orders.Amount].ToString());
             ContractorName = reader[Properties.DBTablesNames.Contractors.Name].ToString();
         }
 
         // creating object not yet added to the database with id = null
-        public Order(sbyte idContractor, DateTime orderDate, decimal amount, string notes = "")
+        public Order(sbyte idContractor, DateTime orderDate, decimal amount)
         {
             Id = null;
             IdContractor = idContractor;
             OrderDate = orderDate;
-            Notes = notes.Trim();
             Amount = amount;
         }
 
@@ -50,7 +50,6 @@ namespace ChocolateFactory.DAL.Entities
             Id = order.Id;
             IdContractor = order.IdContractor;
             OrderDate = order.OrderDate;
-            Notes = order.Notes;
             Amount = order.Amount;
         }
 
@@ -60,7 +59,7 @@ namespace ChocolateFactory.DAL.Entities
 
         public string ToInsert()
         {
-            return $"({IdContractor}, {OrderDate}, '{Notes}', '{Amount}')";
+            return $"({IdContractor}, \"{OrderDate.ToString("yyyy-MM-dd HH:mm:ss")}\", {Amount.ToString().Replace(",",".")})";
         }
 
         public override bool Equals(object obj)
@@ -69,7 +68,6 @@ namespace ChocolateFactory.DAL.Entities
             if (order is null) return false;
             if (!OrderDate.Equals(order.OrderDate)) return false;
             if (!Amount.Equals(order.Amount)) return false;
-            if (Notes.ToLower() != order.Notes.ToLower()) return false;
             return true;
         }
 

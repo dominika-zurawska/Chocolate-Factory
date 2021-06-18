@@ -8,7 +8,7 @@ using MySql.Data.MySqlClient;
 
 namespace ChocolateFactory.DAL.Entities
 {
-    class Product
+    internal class Product
     {
         #region Attributes
 

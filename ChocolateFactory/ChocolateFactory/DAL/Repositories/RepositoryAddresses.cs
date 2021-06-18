@@ -42,7 +42,8 @@ namespace ChocolateFactory.DAL.Repositories
                 MySqlCommand command = new MySqlCommand(GET_ADDRESS, connection);
                 connection.Open();
                 var reader = command.ExecuteReader();
-                address = new Address(reader);
+                while (reader.Read())
+                    address = new Address(reader);
                 connection.Close();
             }
             return address;

@@ -7,7 +7,7 @@ using MySql.Data.MySqlClient;
 
 namespace ChocolateFactory.DAL.Entities
 {
-    class Contractor
+    internal class Contractor
     {
 
         #region Attributes
@@ -20,6 +20,9 @@ namespace ChocolateFactory.DAL.Entities
         #endregion
 
         #region Constructors
+        public Contractor()
+        {
+        }
 
         // creating an object based on MySqlDataReader
         public Contractor(MySqlDataReader reader)
@@ -27,11 +30,11 @@ namespace ChocolateFactory.DAL.Entities
             Id = sbyte.Parse(reader[Properties.DBTablesNames.Contractors.Id].ToString());
             Name = reader[Properties.DBTablesNames.Contractors.Name].ToString();
             NIP = reader[Properties.DBTablesNames.Contractors.TaxIdentificationNumber].ToString();
-            IdAddress = sbyte.Parse(reader[Properties.DBTablesNames.Contractors.Id].ToString());
+            IdAddress = sbyte.Parse(reader[Properties.DBTablesNames.Contractors.Address].ToString());
         }
 
         // creating object not yet added to the database with id = null
-        public Contractor(string name, string nip, string city, string street, string postalCode)
+        public Contractor(string name, string nip)
         {
             Id = null;
             Name = name.Trim();

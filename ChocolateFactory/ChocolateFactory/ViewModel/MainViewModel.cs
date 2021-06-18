@@ -15,17 +15,16 @@ namespace ChocolateFactory.ViewModel
     {
         //creating an instance of the model
         private MainModel model = new MainModel();
-
-
+        public OrderManager OrderMgr { get; set; }
         public TabOrderViewModel TabOrderVM { get; set; }
         public TabOrdersHistoryViewModel TabOrdersHistoryVM { get; set; }
-        public OrderDetailsViewModel OrderDetailsVM { get; set; }
+        
 
         public MainViewModel()
         {
-            TabOrderVM = new TabOrderViewModel(model);
-            TabOrdersHistoryVM = new TabOrdersHistoryViewModel(model);
-            OrderDetailsVM = new OrderDetailsViewModel(model);
+            OrderMgr = new OrderManager(model);
+            TabOrderVM = new TabOrderViewModel(model, OrderMgr);
+            TabOrdersHistoryVM = new TabOrdersHistoryViewModel(model, OrderMgr);
         }
 
     }

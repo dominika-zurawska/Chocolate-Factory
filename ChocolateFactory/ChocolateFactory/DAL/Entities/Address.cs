@@ -7,7 +7,7 @@ using MySql.Data.MySqlClient;
 
 namespace ChocolateFactory.DAL.Entities
 {
-    class Address
+    internal class Address
     {
         #region Attributes
 
@@ -22,6 +22,9 @@ namespace ChocolateFactory.DAL.Entities
         #endregion
 
         #region Constructors
+        public Address() 
+        {
+        }
 
         // creating an object based on MySqlDataReader
         public Address(MySqlDataReader reader)

@@ -12,8 +12,8 @@ namespace ChocolateFactory.DAL.Repositories
     static class RepositoryOrders
     {
         #region Queries
-        private const string ALL_ORDERS = "select orders.id, id_contractor, order_date, notes, amount, name from orders join contractors c on c.id = id_contractor order by 1;";
-        private const string INSERT_ORDER = "INSERT INTO `orders`(`id_contractor`, `order_date`, `notes`) VALUES";
+        private const string ALL_ORDERS = "select orders.id, id_contractor, order_date, amount, name from orders join contractors c on c.id = id_contractor order by 1;";
+        private const string INSERT_ORDER = "INSERT INTO `orders` (`id_contractor`, `order_date`, `amount`) VALUES";
 
         #endregion
 
@@ -33,6 +33,22 @@ namespace ChocolateFactory.DAL.Repositories
             return orders;
         }
 
+        public static Order GetOrder(sbyte idOrder)
+        {
+            Order order = null;
+            using (var connection = DBConnection.Instance.Connection)
+            {
+                string GET_ORDER = $"select orders.id, id_contractor, order_date, amount, name from orders join contractors on contractors.id = id_contractor WHERE orders.id={idOrder};";
+                MySqlCommand command = new MySqlCommand(GET_ORDER, connection);
+                connection.Open();
+                var reader = command.ExecuteReader();
+                while (reader.Read())
+                    order = new Order(reader);
+                connection.Close();
+            }
+            return order;
+        }
+
         public static bool InsertOrder(Order order)
         {
             bool state = false;
@@ -40,6 +56,7 @@ namespace ChocolateFactory.DAL.Repositories
             {
                 MySqlCommand command = new MySqlCommand($"{INSERT_ORDER} {order.ToInsert()}", connection);
                 connection.Open();
+                Console.WriteLine(order.ToInsert());
                 var id = command.ExecuteNonQuery();
                 state = true;
                 order.Id = (sbyte)command.LastInsertedId;
@@ -55,7 +72,7 @@ namespace ChocolateFactory.DAL.Repositories
             {
                 string UPDATE_ORDER = $"UPDATE orders SET {Properties.DBTablesNames.Orders.Contractor}='{order.IdContractor}', " +
                     $"{Properties.DBTablesNames.Orders.OrderDate}='{order.OrderDate}', " +
-                    $"{Properties.DBTablesNames.Orders.Notes}={order.Notes}', {Properties.DBTablesNames.Orders.Amount}={order.Amount} WHERE id_o={order.Id}";
+                    $"{Properties.DBTablesNames.Orders.Amount}={order.Amount} WHERE id_o={order.Id}";
 
                 MySqlCommand command = new MySqlCommand(UPDATE_ORDER, connection);
                 connection.Open();

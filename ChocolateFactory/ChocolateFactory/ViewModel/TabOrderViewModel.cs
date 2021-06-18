@@ -17,20 +17,23 @@ namespace ChocolateFactory.ViewModel
         #region Private components
 
         private MainModel model = null;
+        private OrderManager orderManager = null;
         private ObservableCollection<Contractor> contractors = null;
         private ObservableCollection<Product> products = null;
 
         private Contractor selectedContractor;
         private Product selectedProduct;
         private ObservableCollection<Product> productsList = new ObservableCollection<Product>();
-        private int productsListSelectedIndex;
+        private int productsListSelectedIndex = -1;
+        private int quantity;
 
         #endregion
 
         #region Constructors
-        public TabOrderViewModel(MainModel model)
+        public TabOrderViewModel(MainModel model, OrderManager orderManager)
         {
             this.model = model;
+            this.orderManager = orderManager;
             contractors = model.Contractors;
             products = model.Products;
         }
@@ -99,6 +102,16 @@ namespace ChocolateFactory.ViewModel
             }
         }
 
+        public int Quantity
+        {
+            get { return quantity; }
+            set
+            {
+                quantity = value;
+                onPropertyChanged(nameof(Quantity));
+            }
+        }
+
 
         #endregion
 
@@ -115,32 +128,88 @@ namespace ChocolateFactory.ViewModel
                     addProductToList = new RelayCommand(
                         arg =>
                         {
-                            // sprawdzić czy produkt nie jest pusty i czy nie jest już na liście produkt o takiej samej nazwie
-                            ProductsList.Add(SelectedProduct);
-                            // czyść formularz po dodaniu
+                           orderManager.AddPosition(SelectedProduct, Quantity, ProductsList);
                         },
-                        arg => true
+                        arg => SelectedProduct != null && Quantity > 0
                         );
 
                 return addProductToList;
             }
         }
 
-        private ICommand loadForm = null;
-        public ICommand LoadForm
+        private ICommand deleteProductFromList = null;
+        public ICommand DeleteProductFromList
         {
             get
             {
-                if (loadForm == null)
-                    loadForm = new RelayCommand(
+                if (deleteProductFromList == null)
+                    deleteProductFromList = new RelayCommand(
                         arg =>
                         {
-                            // do implementacji (do ładowania klikniętego elementu z listy do formularza potrzeba najpierw zbindowania każdego pola w formularzu)
+                            orderManager.DeletePosition(ProductsList, ProductsListSelectedIndex);
                         },
-                        arg => true
+                        arg => ProductsListSelectedIndex > -1
                         );
 
-                return loadForm;
+                return deleteProductFromList;
+            }
+        }
+
+        private ICommand loadItemToForm = null;
+        public ICommand LoadItemToForm
+        {
+            get
+            {
+                if (loadItemToForm == null)
+                    loadItemToForm = new RelayCommand(
+                        arg =>
+                        {
+                            SelectedProduct = ProductsList[ProductsListSelectedIndex];
+                            Quantity = ProductsList[ProductsListSelectedIndex].Quantity;
+                            
+                        },
+                        arg => ProductsListSelectedIndex > -1
+                        );
+
+                return loadItemToForm;
+            }
+        }
+
+        private ICommand editProductOnList = null;
+        public ICommand EditProductOnList
+        {
+            get
+            {
+                if (editProductOnList == null)
+                    editProductOnList = new RelayCommand(
+                        arg =>
+                        {
+                            ProductsList[ProductsListSelectedIndex] = orderManager.EditPosition(ProductsList, ProductsListSelectedIndex, SelectedProduct, Quantity);           
+                        },
+                        arg => ProductsListSelectedIndex > -1 && Quantity > 0 && Quantity != ProductsList[ProductsListSelectedIndex].Quantity
+                        );
+
+                return editProductOnList;
+            }
+        }
+
+        private ICommand submitOrder = null;
+        public ICommand SubmitOrder
+        {
+            get
+            {
+                if (submitOrder == null)
+                    submitOrder = new RelayCommand(
+                        arg =>
+                        {
+                            orderManager.SubmitOrder(SelectedContractor, ProductsList);
+                            ProductsListSelectedIndex = -1;
+                            ProductsList = new ObservableCollection<Product>();
+                        },
+                        arg => SelectedContractor != null && ProductsList.Count > 0
+                        );
+
+                return submitOrder;
             }
         }
 

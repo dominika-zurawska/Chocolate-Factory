@@ -30,17 +30,19 @@
                         <StackPanel Orientation="Vertical">
                             <ComboBox Name="CbContractor" Height="30" Margin="0,10" FontSize="17"
                                       ItemsSource="{Binding TabOrderVM.Contractors, Mode=TwoWay}"
-                                      SelectedItem="{Binding TabOrderVM.SelectedContractor}"
+                                      SelectedItem="{Binding TabOrderVM.SelectedContractor, Mode=TwoWay}"
                                       >
                             </ComboBox>
                             <ComboBox Name="CbProduct" Height="30" Margin="0,10" FontSize="17"
                                       ItemsSource="{Binding TabOrderVM.Products, Mode=TwoWay}"
-                                      SelectedItem="{Binding TabOrderVM.SelectedProduct}"
+                                      SelectedItem="{Binding TabOrderVM.SelectedProduct, Mode=TwoWay}"
                                       >
                             </ComboBox>
                             <StackPanel Orientation="Horizontal" Width="220">
-                                <Slider Name="sQuantity"  Width="170" Height="30" Margin="0,10" Minimum="0" Maximum="999" ValueChanged="sQuantity_ValueChanged"
-                                        
+                                <Slider Name="sQuantity"  Width="170" Height="30" Margin="0,10" Minimum="0" 
+                                        Maximum="999"
+                                        Value="{Binding TabOrderVM.Quantity, Mode=TwoWay}"
+                                        ValueChanged="sQuantity_ValueChanged"
                                         >
                                     
                                 </Slider>
@@ -49,9 +51,9 @@
                             </StackPanel>
 
                             <Button Name="btnAdd" Content="Dodaj pozycję" Margin="0,10" Command="{Binding TabOrderVM.AddProductToList}" ></Button>
-                            <Button Name="btnEdit" Content="Edytuj pozycję" Margin="0,10" Click="btnEdit_Click"></Button>
-                            <Button Name="btnDelete" Content="Usuń pozycję" Margin="0,10" Click="btnDelete_Click"></Button>
-                            <Button Name="btnSubmitOrder" Content="Złóż zamówienie" Margin="0,10" Click="btnSubmitOrder_Click"></Button>
+                            <Button Name="btnEdit" Content="Edytuj pozycję" Margin="0,10" Command="{Binding TabOrderVM.EditProductOnList}"></Button>
+                            <Button Name="btnDelete" Content="Usuń pozycję" Margin="0,10" Command="{Binding TabOrderVM.DeleteProductFromList}"></Button>
+                            <Button Name="btnSubmitOrder" Content="Złóż zamówienie" Margin="0,10" Command="{Binding TabOrderVM.SubmitOrder}"></Button>
                             <StackPanel>
                                 <Button Content="EditSave" Width="110" Margin="0,0,10,0"  Name="btnSaveEdit" Visibility="Hidden"></Button>
                                 <Button Content="Cancel" Width="110"  Name="btnCancelEdit" Visibility="Hidden"></Button>
@@ -61,8 +63,8 @@
 
                     <StackPanel Grid.Column="1">
                         <ListView Name="lvPostions" Width="350" Height="370" Margin="0,10"
-                                  ItemsSource="{Binding TabOrderVM.ProductsList}"
-                                  SelectedIndex="{Binding TabOrderVM.ProductsListSelectedIndex}"
+                                  ItemsSource="{Binding TabOrderVM.ProductsList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                  SelectedIndex="{Binding TabOrderVM.ProductsListSelectedIndex, Mode=TwoWay}"
                                   >
 
                             <ListView.View>
@@ -76,7 +78,7 @@
 
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="SelectionChanged">
-                                    <i:InvokeCommandAction Command="{Binding TabOrderVM.LoadForm}"/>
+                                    <i:InvokeCommandAction Command="{Binding TabOrderVM.LoadItemToForm}"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </ListView>
@@ -110,7 +112,11 @@
                                     >
                                 
                             </Button>
-                            <Button Name="btnRepeat" Content="Ponów zamówienie" Margin="10,0"></Button>
+                            <Button Name="btnRepeat" Content="Ponów zamówienie" Margin="10,0"
+                                    Command="{Binding TabOrdersHistoryVM.RepeatOrder}"
+                                    >
+                                
+                            </Button>
                         </StackPanel>
                     </StackPanel>
                 </Grid>

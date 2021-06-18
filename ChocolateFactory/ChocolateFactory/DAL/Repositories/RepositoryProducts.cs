@@ -32,6 +32,23 @@ namespace ChocolateFactory.DAL.Repositories
             return products;
         }
 
+        public static Product GetProduct(sbyte idProduct)
+        {
+            Product product = null;
+            using (var connection = DBConnection.Instance.Connection)
+            {
+                string GET_PRODUCT = $"SELECT * FROM products WHERE id={idProduct}";
+
+                MySqlCommand command = new MySqlCommand(GET_PRODUCT, connection);
+                connection.Open();
+                var reader = command.ExecuteReader();
+                while (reader.Read())
+                    product = new Product(reader);
+                connection.Close();
+            }
+            return product;
+        }
+
         public static bool InsertProduct(Address address)
         {
             return true;
