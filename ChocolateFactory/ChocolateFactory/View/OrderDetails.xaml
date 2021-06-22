@@ -3,10 +3,106 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                xmlns:vm="clr-namespace:ChocolateFactory.ViewModel"
         xmlns:local="clr-namespace:ChocolateFactory.View"
         mc:Ignorable="d"
-        Title="OrderDetails" Height="450" Width="800">
-    <Grid>
-        
+        Title="OrderDetails" Height="Auto" Width="820">
+
+    <Window.Resources>
+        <vm:MainViewModel x:Key="mainVM"/>
+    </Window.Resources>
+
+    <Grid DataContext="{StaticResource mainVM}">
+        <FlowDocumentReader>
+            <FlowDocument 
+                x:Name="FlowDocument"
+                FontFamily="Arial"
+                FontSize="10"
+                IsOptimalParagraphEnabled="true" 
+                IsHyphenationEnabled="true" 
+                IsColumnWidthFlexible="false" 
+                ColumnWidth="800" 
+                PagePadding="Auto">
+                <Paragraph Margin="10,0">
+                    <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Vertical" MinWidth="748" Name="SpHead">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Label HorizontalAlignment="Right" VerticalAlignment="Center" Content="Data "></Label>
+                            <Label HorizontalAlignment="Right" VerticalAlignment="Center" Name="LbDate" Content="{Binding Date, Mode=OneWay}"></Label>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal" Name="SpSupplier">
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Width="400">
+                                <Label Content="SPRZEDAWCA:" FontSize="13"></Label>
+                                <Label Content="Fabryka czekolady"></Label>
+                            </StackPanel>
+                        </StackPanel>
+
+
+                        <StackPanel Orientation="Vertical" Name="SpBuyer">
+
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                                <Label Content="NABYWCA:" FontSize="15"></Label>
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                                    <Label Name="lblId" FontSize="15" Content="{Binding ContractorId, Mode=OneWay}"></Label>
+                                    <Label Name="lblName" FontSize="15" Content="{Binding ContractorName, Mode=OneWay}"></Label>
+                                    <Label Name="lblNip" FontSize="15" Content="{Binding Nip, Mode=OneWay}"></Label>
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical">
+                                <StackPanel Orientation="Horizontal">
+                                    <StackPanel Orientation="Vertical"  MinWidth="45">
+                                        <Label Content="ADRES:" FontSize="15"></Label>
+                                    </StackPanel>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical">
+                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                                        <Label Name="lblCity" FontSize="15" Content="{Binding City, Mode=OneWay}"></Label>
+                                        <Label Name="lblStreet" FontSize="15" Content="{Binding Street, Mode=OneWay}"></Label>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Name="lblHouseNumber" FontSize="15" Content="{Binding HouseNumber, Mode=OneWay}"></Label>
+                                            <Label Name="lblFlatNumber" FontSize="15" Content="{Binding FlatNumber, Mode=OneWay}"></Label>
+                                        </StackPanel>
+                                        <Label Name="lblPostalCode" FontSize="15" Content="{Binding PostalCode, Mode=OneWay}"></Label>
+                                    </StackPanel>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Name="SpPos">
+                        <ListView Name="lvPostions" Height="250" Width="760"
+                                  ItemsSource="{Binding TabOrderVM.ProductsList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                  SelectedIndex="{Binding TabOrderVM.ProductsListSelectedIndex, Mode=TwoWay}"
+                                  >
+
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Header="Nazwa" Width="415"/>
+                                        <GridViewColumn DisplayMemberBinding="{Binding Path=Unit}" Header="j.m." Width="115"/>
+                                        <GridViewColumn DisplayMemberBinding="{Binding Path=Quantity}" Header="Ilość" Width="115"/>
+                                        <GridViewColumn DisplayMemberBinding="{Binding Path=Price}" Header="Cena" Width="115"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Name="SpPrices">
+                        <StackPanel Width="400">
+                        </StackPanel>
+                        <StackPanel HorizontalAlignment="Right"  Width="450">
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel>
+                                        <Label HorizontalAlignment="Right" Content="Do zapłaty:" FontSize="13"></Label>
+                                        <Label Name="lblSum" HorizontalAlignment="Right" FontSize="13" Content="{Binding Amount, Mode=OneWay}"></Label>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                        <Button Content="Drukuj" Height="30" x:Name="butttonPrint" Command="{Binding PrintOrder}" Click="butttonPrint_Click" ></Button>
+                    </StackPanel>
+                </Paragraph>
+            </FlowDocument>
+        </FlowDocumentReader>
     </Grid>
 </Window>

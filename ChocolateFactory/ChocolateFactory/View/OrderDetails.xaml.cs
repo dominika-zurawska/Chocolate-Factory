@@ -23,5 +23,14 @@ namespace ChocolateFactory.View
         {
             InitializeComponent();
         }
+
+        private void butttonPrint_Click(object sender, RoutedEventArgs e)
+        {
+            var printDialog = new PrintDialog();
+            if (printDialog.ShowDialog() == true)
+            {
+                printDialog.PrintDocument(((IDocumentPaginatorSource)FlowDocument).DocumentPaginator, "Faktura");
+            }
+        }
     }
 }

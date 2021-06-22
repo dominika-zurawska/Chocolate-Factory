@@ -9,7 +9,8 @@ namespace ChocolateFactory.Model
 {
     using DAL.Entities;
     using DAL.Repositories;
-    
+    using System.Windows.Controls;
+    using System.Windows.Documents;
 
     public class OrderManager
     {
@@ -113,6 +114,10 @@ namespace ChocolateFactory.Model
 
             // re-order
             SubmitOrder(contractor, productsList);
+        }
+
+        internal void PrintOrder()
+        {
         }
     }
 }
