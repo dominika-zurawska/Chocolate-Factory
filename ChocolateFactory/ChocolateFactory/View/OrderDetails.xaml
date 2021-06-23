@@ -3,16 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                xmlns:vm="clr-namespace:ChocolateFactory.ViewModel"
+        xmlns:lang="clr-namespace:ChocolateFactory.Properties.Lang"
         xmlns:local="clr-namespace:ChocolateFactory.View"
         mc:Ignorable="d"
-        Title="OrderDetails" Height="Auto" Width="820">
+        Title="{x:Static lang:Lang.TitleOrderDetailsWindow}" Height="Auto" Width="820">
 
-    <Window.Resources>
-        <vm:MainViewModel x:Key="mainVM"/>
-    </Window.Resources>
 
-    <Grid DataContext="{StaticResource mainVM}">
+    <Grid>
         <FlowDocumentReader>
             <FlowDocument 
                 x:Name="FlowDocument"
@@ -46,9 +43,9 @@
                             <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
                                 <Label Content="NABYWCA:" FontSize="15"></Label>
                                 <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
-                                    <Label Name="lblId" FontSize="15" Content="{Binding ContractorId, Mode=OneWay}"></Label>
-                                    <Label Name="lblName" FontSize="15" Content="{Binding ContractorName, Mode=OneWay}"></Label>
-                                    <Label Name="lblNip" FontSize="15" Content="{Binding Nip, Mode=OneWay}"></Label>
+                                        <Label Name="lblId" FontSize="15" Content="{Binding ContractorId, Mode=OneWay}"></Label>
+                                        <Label Name="lblName" FontSize="15" Content="{Binding ContractorName, Mode=OneWay}"></Label>
+                                        <Label Name="lblNip" FontSize="15" Content="{Binding Nip, Mode=OneWay}"></Label>
                                 </StackPanel>
                             </StackPanel>
                             <StackPanel Orientation="Vertical">
@@ -59,13 +56,13 @@
                                 </StackPanel>
                                 <StackPanel Orientation="Vertical">
                                     <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
-                                        <Label Name="lblCity" FontSize="15" Content="{Binding City, Mode=OneWay}"></Label>
-                                        <Label Name="lblStreet" FontSize="15" Content="{Binding Street, Mode=OneWay}"></Label>
+                                            <Label Name="lblCity" FontSize="15" Content="{Binding City, Mode=OneWay}"></Label>
+                                            <Label Name="lblStreet" FontSize="15" Content="{Binding Street, Mode=OneWay}"></Label>
                                         <StackPanel Orientation="Horizontal">
-                                            <Label Name="lblHouseNumber" FontSize="15" Content="{Binding HouseNumber, Mode=OneWay}"></Label>
-                                            <Label Name="lblFlatNumber" FontSize="15" Content="{Binding FlatNumber, Mode=OneWay}"></Label>
+                                                <Label Name="lblHouseNumber" FontSize="15" Content="{Binding HouseNumber, Mode=OneWay}"></Label>
+                                                <Label Name="lblFlatNumber" FontSize="15" Content="{Binding FlatNumber, Mode=OneWay}"></Label>
                                         </StackPanel>
-                                        <Label Name="lblPostalCode" FontSize="15" Content="{Binding PostalCode, Mode=OneWay}"></Label>
+                                            <Label Name="lblPostalCode" FontSize="15" Content="{Binding PostalCode, Mode=OneWay}"></Label>
                                     </StackPanel>
                                 </StackPanel>
                             </StackPanel>
@@ -73,7 +70,7 @@
                     </StackPanel>
                     <StackPanel Name="SpPos">
                             <ListView Name="lvPostions" Height="250" Width="760"
-                                  ItemsSource="{Binding OrderProductsData, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                  ItemsSource="{Binding OrderProductsData, Mode=OneWay}">
                                 <ListView.View>
                                 <GridView>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Header="Nazwa" Width="415"/>
@@ -96,7 +93,7 @@
                             </StackPanel>
                         </StackPanel>
                     </StackPanel>
-                        <Button Content="Drukuj" Height="30" x:Name="butttonPrint" Command="{Binding PrintOrder}" Click="butttonPrint_Click" ></Button>
+                        <Button Content="Drukuj" Height="30" x:Name="butttonPrint" Command="{Binding PrintOrder}"></Button>
                     </StackPanel>
                 </Paragraph>
             </FlowDocument>

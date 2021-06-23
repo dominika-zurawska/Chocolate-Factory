@@ -129,9 +129,5 @@ namespace ChocolateFactory.Model
             // re-order
             SubmitOrder(contractor, productsList);
         }
-
-        internal void PrintOrder()
-        {
-        }
     }
 }

@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:ChocolateFactory.ViewModel"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:lang="clr-namespace:ChocolateFactory.Properties.Lang"
         xmlns:local="clr-namespace:ChocolateFactory"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="800">
+        Title="{x:Static lang:Lang.TitleMainWindow}" Height="500" Width="800">
 
     <Window.Resources>
         <vm:MainViewModel x:Key="mainVM"/>
@@ -42,7 +43,6 @@
                                 <Slider Name="sQuantity"  Width="170" Height="30" Margin="0,10" Minimum="0" 
                                         Maximum="999"
                                         Value="{Binding TabOrderVM.Quantity, Mode=TwoWay}"
-                                        ValueChanged="sQuantity_ValueChanged"
                                         >
                                     
                                 </Slider>

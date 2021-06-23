@@ -104,6 +104,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Printer.cs" />
+    <Compile Include="Properties\Lang\Lang.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Lang.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Lang\Lang.pl.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Lang.pl.resx</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\OrderDetailsViewModel.cs" />
     <Compile Include="View\OrderDetails.xaml.cs">
       <DependentUpon>OrderDetails.xaml</DependentUpon>
@@ -201,6 +212,14 @@
     <EmbeddedResource Include="Properties\DBTablesNames\Products.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Products.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Lang\Lang.pl.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Lang.pl.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Lang\Lang.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Lang.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

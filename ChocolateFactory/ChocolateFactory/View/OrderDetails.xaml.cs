@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChocolateFactory.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,20 +18,13 @@ namespace ChocolateFactory.View
     /// <summary>
     /// Logika interakcji dla klasy OrderDetails.xaml
     /// </summary>
-    public partial class OrderDetails : Window
+    partial class OrderDetails : Window
     {
-        public OrderDetails()
+        internal OrderDetails(OrderDetailsViewModel OrderDetailsVM)
         {
             InitializeComponent();
-        }
-
-        private void butttonPrint_Click(object sender, RoutedEventArgs e)
-        {
-            var printDialog = new PrintDialog();
-            if (printDialog.ShowDialog() == true)
-            {
-                printDialog.PrintDocument(((IDocumentPaginatorSource)FlowDocument).DocumentPaginator, "Faktura");
-            }
+            this.DataContext = OrderDetailsVM;
+            this.ShowDialog();
         }
     }
 }

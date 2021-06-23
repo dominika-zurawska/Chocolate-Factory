@@ -24,30 +24,5 @@ namespace ChocolateFactory.View
         {
             InitializeComponent();
         }
-
-        private void btnAdd_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnEdit_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnDelete_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnSubmitOrder_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void sQuantity_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            lblQuantity.Content = (int)e.NewValue;
-        }
     }
 }

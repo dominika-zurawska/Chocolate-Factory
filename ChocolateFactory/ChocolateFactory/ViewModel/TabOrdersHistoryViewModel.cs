@@ -72,8 +72,7 @@ namespace ChocolateFactory.ViewModel
                         {
                             OrderDetailsVM = new OrderDetailsViewModel(model, orderManager, (sbyte)orders[OrderSelectedIndex].Id);
 
-                            var orderDetails = new View.OrderDetails();
-                            orderDetails.ShowDialog();
+                            var orderDetails = new View.OrderDetails(OrderDetailsVM);
                         },
                         arg => OrderSelectedIndex != -1
                         ) ;

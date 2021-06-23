@@ -14,19 +14,26 @@ namespace ChocolateFactory.ViewModel
         #region Private components
 
         private OrderManager _orderManager = null;
-        private sbyte? addressId;
+        private Printer printer = new Printer();
 
-        // test ShowDetails
         private Order orderData;
         private Contractor contractorData;
         private Address addressData;
         private ObservableCollection<Product> orderProductsData;
-        
-        //
+        private DateTime date;
+        private sbyte contractorId;
+        private string contractorName;
+        private string nip;
+        private string city;
+        private string street;
+        private string houseNumber;
+        private string flatNumber;
+        private string postalCode;
+        private decimal amount;
+
         #endregion
 
         #region Properties
-        // test ShowDetails
         public Order OrderData
         {
             get { return orderData; }
@@ -66,28 +73,7 @@ namespace ChocolateFactory.ViewModel
                 onPropertyChanged(nameof(OrderProductsData));
             }
         }
-        //
-        #endregion
 
-        #region Constructors
-        public OrderDetailsViewModel(MainModel model, OrderManager orderManager, sbyte orderId)
-        {
-            _orderManager = orderManager;
-            contractorId = model.Orders.FirstOrDefault(o => o.Id == orderId).IdContractor;
-            nip = model.Contractors.FirstOrDefault(c => c.Id == contractorId).NIP;
-            contractorName = model.Contractors.FirstOrDefault(c => c.Id == contractorId).Name;
-            addressId = model.Contractors.FirstOrDefault(c => c.Id == contractorId).IdAddress;
-            city = model.Addresses.FirstOrDefault(a => a.Id == addressId).City;
-            street = model.Addresses.FirstOrDefault(a => a.Id == addressId).City;
-            houseNumber = model.Addresses.FirstOrDefault(a => a.Id == addressId).HouseNumber;
-            flatNumber = model.Addresses.FirstOrDefault(a => a.Id == addressId).FlatNumber;
-            postalCode = model.Addresses.FirstOrDefault(a => a.Id == addressId).PostalCode;
-            date = model.Orders.FirstOrDefault(o => o.Id == orderId).OrderDate;
-            amount = model.Orders.FirstOrDefault(o => o.Id == orderId).Amount;
-            orderProductsData = orderManager.GetPositions(orderId);
-        }
-
-        public DateTime date;
         public DateTime Date
         {
             get { return date; }
@@ -98,8 +84,6 @@ namespace ChocolateFactory.ViewModel
             }
         }
 
-
-        public sbyte contractorId;
         public sbyte ContractorId
         {
             get { return contractorId; }
@@ -110,7 +94,6 @@ namespace ChocolateFactory.ViewModel
             }
         }
 
-        public string contractorName;
         public string ContractorName
         {
             get { return contractorName; }
@@ -121,7 +104,6 @@ namespace ChocolateFactory.ViewModel
             }
         }
 
-        public string nip;
         public string Nip
         {
             get { return nip; }
@@ -132,7 +114,6 @@ namespace ChocolateFactory.ViewModel
             }
         }
 
-        public string city;
         public string City
         {
             get { return city; }
@@ -143,7 +124,6 @@ namespace ChocolateFactory.ViewModel
             }
         }
 
-        public string street;
         public string Street
         {
             get { return street; }
@@ -154,7 +134,6 @@ namespace ChocolateFactory.ViewModel
             }
         }
 
-        public string houseNumber;
         public string HouseNumber
         {
             get { return houseNumber; }
@@ -165,7 +144,6 @@ namespace ChocolateFactory.ViewModel
             }
         }
 
-        public string flatNumber;
         public string FlatNumber
         {
             get { return flatNumber; }
@@ -176,7 +154,6 @@ namespace ChocolateFactory.ViewModel
             }
         }
 
-        public string postalCode;
         public string PostalCode
         {
             get { return postalCode; }
@@ -187,7 +164,6 @@ namespace ChocolateFactory.ViewModel
             }
         }
 
-        public decimal amount;
         public decimal Amount
         {
             get { return amount; }
@@ -200,25 +176,48 @@ namespace ChocolateFactory.ViewModel
 
         #endregion
 
-        #region Properties
+
+        #region Constructors
+
+        public OrderDetailsViewModel(MainModel model, OrderManager orderManager, sbyte orderId)
+        {
+            this._orderManager = orderManager;
+
+            orderManager.ShowDetails(orderId, ref orderData, ref contractorData, ref addressData, ref orderProductsData);
+
+            ContractorId = (sbyte)ContractorData.Id;
+            Nip = ContractorData.NIP;
+            ContractorName = ContractorData.Name;
+            City = AddressData.City;
+            Street = AddressData.Street;
+            HouseNumber = AddressData.HouseNumber;
+            FlatNumber = AddressData.FlatNumber;
+            PostalCode = AddressData.PostalCode;
+            Date = OrderData.OrderDate;
+            Amount = OrderData.Amount;
+            OrderProductsData = OrderProductsData;
+        }
+
+        
 
         #endregion
 
         #region Commands
 
-        private ICommand print;
-        public ICommand Print
+        private ICommand printOrder;
+        public ICommand PrintOrder
         {
             get
             {
-                return print ?? (print = new RelayCommand(
+                return printOrder ?? (printOrder = new RelayCommand(
                     (p) =>
                     {
-                        _orderManager.PrintOrder();
+                        printer.PrintOrder();                        
                     }
                     , p => true));
             }
         }
+
         #endregion
     }
 }
