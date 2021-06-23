@@ -95,6 +95,20 @@ namespace ChocolateFactory.Model
             }
         }
 
+        internal ObservableCollection<Product> GetPositions(sbyte orderId)
+        {
+            ObservableCollection<OrderPosition> orderPositions = RepositoryOrderPositions.GetOrderPositions(orderId);
+            ObservableCollection<Product> productsList = new ObservableCollection<Product>();
+            foreach (OrderPosition position in orderPositions)
+            {
+                Product product = RepositoryProducts.GetProduct(position.IdProduct);
+
+                product.Quantity = position.Quantity;
+                productsList.Add(product);
+            }
+            return productsList;
+        }
+
         internal void RepeatOrder(sbyte orderId)
         {
             // get order by ID

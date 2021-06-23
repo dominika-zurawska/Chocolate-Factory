@@ -72,17 +72,14 @@
                         </StackPanel>
                     </StackPanel>
                     <StackPanel Name="SpPos">
-                        <ListView Name="lvPostions" Height="250" Width="760"
-                                  ItemsSource="{Binding TabOrderVM.ProductsList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                  SelectedIndex="{Binding TabOrderVM.ProductsListSelectedIndex, Mode=TwoWay}"
-                                  >
-
-                            <ListView.View>
+                            <ListView Name="lvPostions" Height="250" Width="760"
+                                  ItemsSource="{Binding OrderProductsData, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                <ListView.View>
                                 <GridView>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Header="Nazwa" Width="415"/>
                                         <GridViewColumn DisplayMemberBinding="{Binding Path=Unit}" Header="j.m." Width="115"/>
                                         <GridViewColumn DisplayMemberBinding="{Binding Path=Quantity}" Header="Ilość" Width="115"/>
-                                        <GridViewColumn DisplayMemberBinding="{Binding Path=Price}" Header="Cena" Width="115"/>
+                                        <GridViewColumn DisplayMemberBinding="{Binding Path=PricePerUnit}" Header="Cena" Width="115"/>
                                 </GridView>
                             </ListView.View>
                         </ListView>

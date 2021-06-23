@@ -47,7 +47,7 @@
                                     
                                 </Slider>
                                 <Label Name="lblQuantity" Content="0" Margin="0,5"></Label>
-                                <Label Content="j.m." Margin="0,5"></Label>
+                                <Label Name="lblUnit" Content="j.m." Margin="0,5"></Label>
                             </StackPanel>
 
                             <Button Name="btnAdd" Content="Dodaj pozycję" Margin="0,10" Command="{Binding TabOrderVM.AddProductToList}" ></Button>
@@ -84,7 +84,7 @@
                         </ListView>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Suma:" Margin="20,0, 200,0"></Label>
-                            <Label Content="cała kwota"></Label>
+                            <Label Name="lblAmount" Content="cała kwota"></Label>
                         </StackPanel>
                     </StackPanel>
                 </Grid>

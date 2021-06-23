@@ -7,23 +7,21 @@ namespace ChocolateFactory.ViewModel
     using DAL.Entities;
     using BaseClass;
     using System.Windows.Input;
+    using System.Linq;
 
     class OrderDetailsViewModel : BaseViewModel
     {
         #region Private components
 
-        private MainModel model = null;
-        private OrderManager orderManager = null;
-
-        private OrderManager _orderManager = new OrderManager();
-
-        private sbyte orderId;
+        private OrderManager _orderManager = null;
+        private sbyte? addressId;
 
         // test ShowDetails
         private Order orderData;
         private Contractor contractorData;
         private Address addressData;
-        private ObservableCollection<Product> orderProductsData = null;
+        private ObservableCollection<Product> orderProductsData;
+        
         //
         #endregion
 
@@ -74,23 +72,23 @@ namespace ChocolateFactory.ViewModel
         #region Constructors
         public OrderDetailsViewModel(MainModel model, OrderManager orderManager, sbyte orderId)
         {
-            this.model = model;
-            this.orderId = orderId;
-            this.orderManager = orderManager;
-
-            // test ShowDetails
-            orderManager.ShowDetails(orderId, ref orderData, ref contractorData, ref addressData, ref orderProductsData);
-
-
-            Console.WriteLine("Nr zamówienia " + orderId.ToString());
-            Console.WriteLine(OrderData.ToInsert());
-            Console.WriteLine(ContractorData.ToInsert());
-            Console.WriteLine(AddressData.ToInsert());
-            foreach (Product p in orderProductsData) { Console.WriteLine(p.ToInsert()); }
+            _orderManager = orderManager;
+            contractorId = model.Orders.FirstOrDefault(o => o.Id == orderId).IdContractor;
+            nip = model.Contractors.FirstOrDefault(c => c.Id == contractorId).NIP;
+            contractorName = model.Contractors.FirstOrDefault(c => c.Id == contractorId).Name;
+            addressId = model.Contractors.FirstOrDefault(c => c.Id == contractorId).IdAddress;
+            city = model.Addresses.FirstOrDefault(a => a.Id == addressId).City;
+            street = model.Addresses.FirstOrDefault(a => a.Id == addressId).City;
+            houseNumber = model.Addresses.FirstOrDefault(a => a.Id == addressId).HouseNumber;
+            flatNumber = model.Addresses.FirstOrDefault(a => a.Id == addressId).FlatNumber;
+            postalCode = model.Addresses.FirstOrDefault(a => a.Id == addressId).PostalCode;
+            date = model.Orders.FirstOrDefault(o => o.Id == orderId).OrderDate;
+            amount = model.Orders.FirstOrDefault(o => o.Id == orderId).Amount;
+            orderProductsData = orderManager.GetPositions(orderId);
         }
 
-        public string date;
-        public string Date
+        public DateTime date;
+        public DateTime Date
         {
             get { return date; }
             private set
@@ -101,8 +99,8 @@ namespace ChocolateFactory.ViewModel
         }
 
 
-        public string contractorId;
-        public string ContractorId
+        public sbyte contractorId;
+        public sbyte ContractorId
         {
             get { return contractorId; }
             private set
@@ -115,7 +113,7 @@ namespace ChocolateFactory.ViewModel
         public string contractorName;
         public string ContractorName
         {
-            get { return contractorId; }
+            get { return contractorName; }
             private set
             {
                 contractorName = value;
@@ -189,8 +187,8 @@ namespace ChocolateFactory.ViewModel
             }
         }
 
-        public string amount;
-        public string Amount
+        public decimal amount;
+        public decimal Amount
         {
             get { return amount; }
             private set
@@ -216,15 +214,11 @@ namespace ChocolateFactory.ViewModel
                 return print ?? (print = new RelayCommand(
                     (p) =>
                     {
-                        orderManager.PrintOrder();
+                        _orderManager.PrintOrder();
                     }
                     , p => true));
             }
         }
-
-
-
-
         #endregion
     }
 }

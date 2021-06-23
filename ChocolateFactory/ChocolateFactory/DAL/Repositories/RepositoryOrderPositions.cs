@@ -21,7 +21,7 @@ namespace ChocolateFactory.DAL.Repositories
         #region CRUD
         public static ObservableCollection<OrderPosition> GetOrderPositions(sbyte idOrder)
         {
-            ObservableCollection<OrderPosition> orderPosition = new ObservableCollection<OrderPosition>();
+            ObservableCollection<OrderPosition> orderPositions = new ObservableCollection<OrderPosition>();
             using (var connection = DBConnection.Instance.Connection)
             {
                 string ALL_ORDERED_PRODUCTS = $"SELECT * FROM `order_positions` WHERE id_order={idOrder}";
@@ -31,10 +31,10 @@ namespace ChocolateFactory.DAL.Repositories
                 connection.Open();
                 var reader = command.ExecuteReader();
                 while (reader.Read())
-                    orderPosition.Add(new OrderPosition(reader));
+                    orderPositions.Add(new OrderPosition(reader));
                 connection.Close();
             }
-            return orderPosition;
+            return orderPositions;
         }
 
         public static bool InsertOrderPosition(OrderPosition orderPosition)

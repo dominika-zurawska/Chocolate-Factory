@@ -16,6 +16,7 @@ namespace ChocolateFactory.Model
         public ObservableCollection<Contractor> Contractors { get; set; } = new ObservableCollection<Contractor>();
         public ObservableCollection<Order> Orders { get; set; } = new ObservableCollection<Order>();
         public ObservableCollection<Product> Products { get; set; } = new ObservableCollection<Product>();
+        public ObservableCollection<Address> Addresses { get; set; } = new ObservableCollection<Address>();
 
         public MainModel()
         {
@@ -29,6 +30,9 @@ namespace ChocolateFactory.Model
             var products = RepositoryProducts.GetAllProducts();
             foreach (var p in products)
                 Products.Add(p);
+            var addresses = RepositoryAddresses.GetAllAddresses();
+            foreach (var a in addresses)
+                Addresses.Add(a);
         }
 
     }
