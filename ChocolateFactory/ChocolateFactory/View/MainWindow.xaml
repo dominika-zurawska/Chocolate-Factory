@@ -46,7 +46,7 @@
                                         >
                                     
                                 </Slider>
-                                <Label Name="lblQuantity" Content="0" Margin="0,5"></Label>
+                                <Label Name="lblQuantity" Content="{Binding TabOrderVM.Quantity, Mode=TwoWay}" Margin="0,5"></Label>
                                 <Label Name="lblUnit" Content="j.m." Margin="0,5"></Label>
                             </StackPanel>
 

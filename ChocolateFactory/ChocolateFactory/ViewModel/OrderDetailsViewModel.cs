@@ -21,7 +21,7 @@ namespace ChocolateFactory.ViewModel
         private Address addressData;
         private ObservableCollection<Product> orderProductsData;
         private DateTime date;
-        private sbyte contractorId;
+        private int contractorId;
         private string contractorName;
         private string nip;
         private string city;
@@ -84,7 +84,7 @@ namespace ChocolateFactory.ViewModel
             }
         }
 
-        public sbyte ContractorId
+        public int ContractorId
         {
             get { return contractorId; }
             private set
@@ -179,13 +179,13 @@ namespace ChocolateFactory.ViewModel
 
         #region Constructors
 
-        public OrderDetailsViewModel(MainModel model, OrderManager orderManager, sbyte orderId)
+        public OrderDetailsViewModel(MainModel model, OrderManager orderManager, int orderId)
         {
             this._orderManager = orderManager;
 
             orderManager.ShowDetails(orderId, ref orderData, ref contractorData, ref addressData, ref orderProductsData);
 
-            ContractorId = (sbyte)ContractorData.Id;
+            ContractorId = (int)ContractorData.Id;
             Nip = ContractorData.NIP;
             ContractorName = ContractorData.Name;
             City = AddressData.City;

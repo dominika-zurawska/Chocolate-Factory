@@ -12,9 +12,9 @@ namespace ChocolateFactory.DAL.Entities
 
         #region Attributes
 
-        public sbyte? Id { get; set; }
-        public sbyte IdOrder { get; set; }
-        public sbyte IdProduct { get; set; }
+        public int? Id { get; set; }
+        public int IdOrder { get; set; }
+        public int IdProduct { get; set; }
         public int Quantity { get; set; }
 
         #endregion
@@ -24,14 +24,14 @@ namespace ChocolateFactory.DAL.Entities
         // creating an object based on MySqlDataReader
         public OrderPosition(MySqlDataReader reader)
         {
-            Id = sbyte.Parse(reader[Properties.DBTablesNames.OrderPositions.Id].ToString());
-            IdOrder = sbyte.Parse(reader[Properties.DBTablesNames.OrderPositions.Order].ToString());
-            IdProduct = sbyte.Parse(reader[Properties.DBTablesNames.OrderPositions.Product].ToString());
+            Id = int.Parse(reader[Properties.DBTablesNames.OrderPositions.Id].ToString());
+            IdOrder = int.Parse(reader[Properties.DBTablesNames.OrderPositions.Order].ToString());
+            IdProduct = int.Parse(reader[Properties.DBTablesNames.OrderPositions.Product].ToString());
             Quantity = int.Parse(reader[Properties.DBTablesNames.OrderPositions.Quantity].ToString());
         }
 
         // creating object not yet added to the database with id = null
-        public OrderPosition(sbyte idOrder, sbyte idProduct, int quantity)
+        public OrderPosition(int idOrder, int idProduct, int quantity)
         {
             Id = null;
             IdOrder = idOrder;

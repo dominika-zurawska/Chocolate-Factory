@@ -13,8 +13,8 @@ namespace ChocolateFactory.DAL.Entities
 
         #region Attributes
 
-        public sbyte? Id { get; set; }
-        public sbyte IdContractor { get; set; }
+        public int? Id { get; set; }
+        public int IdContractor { get; set; }
         public DateTime OrderDate { get; set; }
         public decimal Amount { get; set; }
         public string ContractorName { get; set; }
@@ -29,15 +29,15 @@ namespace ChocolateFactory.DAL.Entities
         // creating an object based on MySqlDataReader
         public Order(MySqlDataReader reader)
         {
-            Id = sbyte.Parse(reader[Properties.DBTablesNames.Orders.Id].ToString());
-            IdContractor = sbyte.Parse(reader[Properties.DBTablesNames.Orders.Contractor].ToString());
+            Id = int.Parse(reader[Properties.DBTablesNames.Orders.Id].ToString());
+            IdContractor = int.Parse(reader[Properties.DBTablesNames.Orders.Contractor].ToString());
             OrderDate = DateTime.Parse(reader[Properties.DBTablesNames.Orders.OrderDate].ToString());
             Amount = decimal.Parse(reader[Properties.DBTablesNames.Orders.Amount].ToString());
             ContractorName = reader[Properties.DBTablesNames.Contractors.Name].ToString();
         }
 
         // creating object not yet added to the database with id = null
-        public Order(sbyte idContractor, DateTime orderDate, decimal amount)
+        public Order(int idContractor, DateTime orderDate, decimal amount)
         {
             Id = null;
             IdContractor = idContractor;

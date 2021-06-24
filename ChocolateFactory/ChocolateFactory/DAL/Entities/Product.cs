@@ -12,7 +12,7 @@ namespace ChocolateFactory.DAL.Entities
     {
         #region Attributes
 
-        public sbyte? Id { get; set; }
+        public int? Id { get; set; }
         public string Name { get; set; }
         public string Unit { get; set; }
         public decimal PricePerUnit { get; set; }
@@ -25,7 +25,7 @@ namespace ChocolateFactory.DAL.Entities
         // creating an object based on MySqlDataReader
         public Product(MySqlDataReader reader) 
         { 
-            Id = sbyte.Parse(reader[Properties.DBTablesNames.Products.Id].ToString());
+            Id = int.Parse(reader[Properties.DBTablesNames.Products.Id].ToString());
             Name = reader[Properties.DBTablesNames.Products.Name].ToString();
             Unit = reader[Properties.DBTablesNames.Products.Unit].ToString();
             PricePerUnit = decimal.Parse(reader[Properties.DBTablesNames.Products.PricePerUnit].ToString());

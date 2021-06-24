@@ -64,26 +64,26 @@ namespace ChocolateFactory.Model
             }
 
             // add new order to the database
-            Order newOrder = new Order((sbyte)contractor.Id, DateTime.Now, amount);
+            Order newOrder = new Order((int)contractor.Id, DateTime.Now, amount);
             if (RepositoryOrders.InsertOrder(newOrder))
             {
-                newOrder.ContractorName= RepositoryContractors.GetContractor((sbyte)contractor.Id).Name;
+                newOrder.ContractorName= RepositoryContractors.GetContractor((int)contractor.Id).Name;
                 model.Orders.Add(newOrder);
             }
 
             // add ordered products to table order_positions
             foreach (Product product in productsList) 
             {
-                OrderPosition newOrderPosition = new OrderPosition((sbyte)newOrder.Id, (sbyte)product.Id, product.Quantity);
+                OrderPosition newOrderPosition = new OrderPosition((int)newOrder.Id, (int)product.Id, product.Quantity);
                 RepositoryOrderPositions.InsertOrderPosition(newOrderPosition);
             }
         }
 
-        internal void ShowDetails(sbyte orderId, ref Order orderData, ref Contractor contractorData, ref Address addressData, ref ObservableCollection<Product> orderProductsData)
+        internal void ShowDetails(int orderId, ref Order orderData, ref Contractor contractorData, ref Address addressData, ref ObservableCollection<Product> orderProductsData)
         {
             orderData = RepositoryOrders.GetOrder(orderId);
-            contractorData = RepositoryContractors.GetContractor((sbyte)orderData.IdContractor);
-            addressData = RepositoryAddresses.GetAddress((sbyte)contractorData.IdAddress);
+            contractorData = RepositoryContractors.GetContractor((int)orderData.IdContractor);
+            addressData = RepositoryAddresses.GetAddress((int)contractorData.IdAddress);
 
             ObservableCollection<OrderPosition> orderPositions = RepositoryOrderPositions.GetOrderPositions(orderId);
             orderProductsData = new ObservableCollection<Product>(); // reset products list
@@ -95,7 +95,7 @@ namespace ChocolateFactory.Model
             }
         }
 
-        internal ObservableCollection<Product> GetPositions(sbyte orderId)
+        internal ObservableCollection<Product> GetPositions(int orderId)
         {
             ObservableCollection<OrderPosition> orderPositions = RepositoryOrderPositions.GetOrderPositions(orderId);
             ObservableCollection<Product> productsList = new ObservableCollection<Product>();
@@ -109,7 +109,7 @@ namespace ChocolateFactory.Model
             return productsList;
         }
 
-        internal void RepeatOrder(sbyte orderId)
+        internal void RepeatOrder(int orderId)
         {
             // get order by ID
             Order oldOrder = RepositoryOrders.GetOrder(orderId);

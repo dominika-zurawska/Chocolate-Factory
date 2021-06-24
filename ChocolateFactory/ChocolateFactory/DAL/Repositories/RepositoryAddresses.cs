@@ -12,7 +12,7 @@ namespace ChocolateFactory.DAL.Repositories
     static class RepositoryAddresses
     {
         #region Queries
-        private const string ALL_ADDRESSES = "SELECT * FROM addresses";
+        private static string ALL_ADDRESSES = $"SELECT * FROM `{Properties.DBTablesNames.Addresses.TableName}`";
 
         #endregion
 
@@ -23,28 +23,43 @@ namespace ChocolateFactory.DAL.Repositories
             using (var connection = DBConnection.Instance.Connection)
             {
                 MySqlCommand command = new MySqlCommand(ALL_ADDRESSES, connection);
-                connection.Open();
-                var reader = command.ExecuteReader();
-                while (reader.Read())
-                    addresses.Add(new Address(reader));
-                connection.Close();
+                try
+                {
+                    connection.Open();
+                    var reader = command.ExecuteReader();
+                    while (reader.Read())
+                        addresses.Add(new Address(reader));
+                    connection.Close();
+                }
+                catch (Exception error)
+                {
+                    Model.DbErrorNotifier.notifyError(error);
+                }
             }
             return addresses;
         }
 
-        public static Address GetAddress(sbyte idAddress)
+        public static Address GetAddress(int idAddress)
         {
             Address address = null;
             using (var connection = DBConnection.Instance.Connection)
             {
-                string GET_ADDRESS = $"SELECT * FROM addresses WHERE id={idAddress}";
+                string GET_ADDRESS = $"SELECT * FROM `{Properties.DBTablesNames.Addresses.TableName}` WHERE `{Properties.DBTablesNames.Addresses.Id}`={idAddress}";
 
                 MySqlCommand command = new MySqlCommand(GET_ADDRESS, connection);
-                connection.Open();
-                var reader = command.ExecuteReader();
-                while (reader.Read())
-                    address = new Address(reader);
-                connection.Close();
+                
+                try
+                {
+                    connection.Open();
+                    var reader = command.ExecuteReader();
+                    while (reader.Read())
+                        address = new Address(reader);
+                    connection.Close();
+                }
+                catch (Exception error)
+                {
+                    Model.DbErrorNotifier.notifyError(error);
+                }
             }
             return address;
         }
@@ -61,7 +76,7 @@ namespace ChocolateFactory.DAL.Repositories
             return true;
         }
 
-        public static bool DeleteAddress(sbyte idAddress)
+        public static bool DeleteAddress(int idAddress)
         {
             return true;
         }

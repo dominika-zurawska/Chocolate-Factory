@@ -12,7 +12,7 @@ namespace ChocolateFactory.DAL.Repositories
     static class RepositoryContractors
     {
         #region Queries
-        private const string ALL_CONTRACTORS = "SELECT * FROM contractors";
+        private static string ALL_CONTRACTORS = $"SELECT * FROM `{Properties.DBTablesNames.Contractors.TableName}`";
 
         #endregion
 
@@ -23,28 +23,43 @@ namespace ChocolateFactory.DAL.Repositories
             using (var connection = DBConnection.Instance.Connection)
             {
                 MySqlCommand command = new MySqlCommand(ALL_CONTRACTORS, connection);
-                connection.Open();
-                var reader = command.ExecuteReader();
-                while (reader.Read())
-                    contractors.Add(new Contractor(reader));
-                connection.Close();
+                try 
+                { 
+                    connection.Open();
+                    var reader = command.ExecuteReader();
+                    while (reader.Read())
+                        contractors.Add(new Contractor(reader));
+                    connection.Close();
+                }
+                catch (Exception error) 
+                {
+                    Model.DbErrorNotifier.notifyError(error);
+                }
             }
             return contractors;
         }
 
-        public static Contractor GetContractor(sbyte idContractor)
+        public static Contractor GetContractor(int idContractor)
         {
             Contractor contractor = null;
             using (var connection = DBConnection.Instance.Connection)
             {
-                string GET_CONTRACTOR = $"SELECT * FROM contractors WHERE id={idContractor}";
+                string GET_CONTRACTOR = $"SELECT * FROM `{Properties.DBTablesNames.Contractors.TableName}` WHERE `{Properties.DBTablesNames.Contractors.Id}`={idContractor}";
 
                 MySqlCommand command = new MySqlCommand(GET_CONTRACTOR, connection);
-                connection.Open();
-                var reader = command.ExecuteReader();
-                while (reader.Read())
-                contractor = new Contractor(reader);
-                connection.Close();
+                
+                try
+                {
+                    connection.Open();
+                    var reader = command.ExecuteReader();
+                    while (reader.Read())
+                        contractor = new Contractor(reader);
+                    connection.Close();
+                }
+                catch (Exception error)
+                {
+                    Model.DbErrorNotifier.notifyError(error);
+                }
             }
             return contractor;
         }
@@ -61,7 +76,7 @@ namespace ChocolateFactory.DAL.Repositories
             return true;
         }
 
-        public static bool DeleteContractor(sbyte idAddress)
+        public static bool DeleteContractor(int idAddress)
         {
             return true;
         }

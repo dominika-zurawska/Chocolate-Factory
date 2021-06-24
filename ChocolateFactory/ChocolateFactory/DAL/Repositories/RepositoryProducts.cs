@@ -12,7 +12,7 @@ namespace ChocolateFactory.DAL.Repositories
     static class RepositoryProducts
     {
         #region Queries
-        private const string ALL_PRODUCTS = "SELECT * FROM products";
+        private static string ALL_PRODUCTS = $"SELECT * FROM `{Properties.DBTablesNames.Products.TableName}`";
 
         #endregion
 
@@ -23,28 +23,44 @@ namespace ChocolateFactory.DAL.Repositories
             using (var connection = DBConnection.Instance.Connection)
             {
                 MySqlCommand command = new MySqlCommand(ALL_PRODUCTS, connection);
-                connection.Open();
-                var reader = command.ExecuteReader();
-                while (reader.Read())
-                    products.Add(new Product(reader));
-                connection.Close();
+                
+                try
+                {
+                    connection.Open();
+                    var reader = command.ExecuteReader();
+                    while (reader.Read())
+                        products.Add(new Product(reader));
+                    connection.Close();
+                }
+                catch (Exception error)
+                {
+                    Model.DbErrorNotifier.notifyError(error);
+                }
             }
             return products;
         }
 
-        public static Product GetProduct(sbyte idProduct)
+        public static Product GetProduct(int idProduct)
         {
             Product product = null;
             using (var connection = DBConnection.Instance.Connection)
             {
-                string GET_PRODUCT = $"SELECT * FROM products WHERE id={idProduct}";
+                string GET_PRODUCT = $"SELECT * FROM `{Properties.DBTablesNames.Products.TableName}` WHERE `{Properties.DBTablesNames.Products.Id}`={idProduct}";
 
                 MySqlCommand command = new MySqlCommand(GET_PRODUCT, connection);
-                connection.Open();
-                var reader = command.ExecuteReader();
-                while (reader.Read())
-                    product = new Product(reader);
-                connection.Close();
+                
+                try
+                {
+                    connection.Open();
+                    var reader = command.ExecuteReader();
+                    while (reader.Read())
+                        product = new Product(reader);
+                    connection.Close();
+                }
+                catch (Exception error)
+                {
+                    Model.DbErrorNotifier.notifyError(error);
+                }
             }
             return product;
         }
@@ -59,7 +75,7 @@ namespace ChocolateFactory.DAL.Repositories
             return true;
         }
 
-        public static bool DeleteProduct(sbyte idAddress)
+        public static bool DeleteProduct(int idAddress)
         {
             return true;
         }

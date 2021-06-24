@@ -12,8 +12,13 @@ namespace ChocolateFactory.DAL.Repositories
     static class RepositoryOrders
     {
         #region Queries
-        private const string ALL_ORDERS = "select orders.id, id_contractor, order_date, amount, name from orders join contractors c on c.id = id_contractor order by 1;";
-        private const string INSERT_ORDER = "INSERT INTO `orders` (`id_contractor`, `order_date`, `amount`) VALUES";
+        private static string ALL_ORDERS = $"SELECT o.`{Properties.DBTablesNames.Orders.Id}`, `{Properties.DBTablesNames.Orders.Contractor}`," +
+            $"`{Properties.DBTablesNames.Orders.OrderDate}`, `{Properties.DBTablesNames.Orders.Amount}`, `{Properties.DBTablesNames.Contractors.Name}` " +
+            $"FROM `{Properties.DBTablesNames.Orders.TableName}` o JOIN `{Properties.DBTablesNames.Contractors.TableName}` c ON " +
+            $"c.`{Properties.DBTablesNames.Contractors.Id}` = `{Properties.DBTablesNames.Orders.Contractor}` ORDER BY 1;";
+
+        private static string INSERT_ORDER = $"INSERT INTO `{Properties.DBTablesNames.Orders.TableName}` (`{Properties.DBTablesNames.Orders.Contractor}`, " +
+            $"`{Properties.DBTablesNames.Orders.OrderDate}`, `{Properties.DBTablesNames.Orders.Amount}`) VALUES";
 
         #endregion
 
@@ -24,27 +29,46 @@ namespace ChocolateFactory.DAL.Repositories
             using (var connection = DBConnection.Instance.Connection)
             {
                 MySqlCommand command = new MySqlCommand(ALL_ORDERS, connection);
-                connection.Open();
-                var reader = command.ExecuteReader();
-                while (reader.Read())
-                    orders.Add(new Order(reader));
-                connection.Close();
+                
+                try
+                {
+                    connection.Open();
+                    var reader = command.ExecuteReader();
+                    while (reader.Read())
+                        orders.Add(new Order(reader));
+                    connection.Close();
+                }
+                catch (Exception error)
+                {
+                    Model.DbErrorNotifier.notifyError(error);
+                }
             }
             return orders;
         }
 
-        public static Order GetOrder(sbyte idOrder)
+        public static Order GetOrder(int idOrder)
         {
             Order order = null;
             using (var connection = DBConnection.Instance.Connection)
             {
-                string GET_ORDER = $"select orders.id, id_contractor, order_date, amount, name from orders join contractors on contractors.id = id_contractor WHERE orders.id={idOrder};";
+                string GET_ORDER = $"SELECT o.`{Properties.DBTablesNames.Orders.Id}`, `{Properties.DBTablesNames.Orders.Contractor}`," +
+                    $"`{Properties.DBTablesNames.Orders.OrderDate}`, `{Properties.DBTablesNames.Orders.Amount}`, `{Properties.DBTablesNames.Contractors.Name}` " +
+                    $"FROM `{Properties.DBTablesNames.Orders.TableName}` o JOIN `{Properties.DBTablesNames.Contractors.TableName}` c ON " +
+                    $"c.`{Properties.DBTablesNames.Contractors.Id}` = `{Properties.DBTablesNames.Orders.Contractor}` WHERE o.`{Properties.DBTablesNames.Orders.Id}`={idOrder};";
                 MySqlCommand command = new MySqlCommand(GET_ORDER, connection);
-                connection.Open();
-                var reader = command.ExecuteReader();
-                while (reader.Read())
-                    order = new Order(reader);
-                connection.Close();
+                
+                try
+                {
+                    connection.Open();
+                    var reader = command.ExecuteReader();
+                    while (reader.Read())
+                        order = new Order(reader);
+                    connection.Close();
+                }
+                catch (Exception error)
+                {
+                    Model.DbErrorNotifier.notifyError(error);
+                }
             }
             return order;
         }
@@ -55,12 +79,20 @@ namespace ChocolateFactory.DAL.Repositories
             using (var connection = DBConnection.Instance.Connection)
             {
                 MySqlCommand command = new MySqlCommand($"{INSERT_ORDER} {order.ToInsert()}", connection);
-                connection.Open();
-                Console.WriteLine(order.ToInsert());
-                var id = command.ExecuteNonQuery();
-                state = true;
-                order.Id = (sbyte)command.LastInsertedId;
-                connection.Close();
+                
+                try
+                {
+                    connection.Open();
+                    Console.WriteLine(order.ToInsert());
+                    var id = command.ExecuteNonQuery();
+                    state = true;
+                    order.Id = (int)command.LastInsertedId;
+                    connection.Close();
+                }
+                catch (Exception error)
+                {
+                    Model.DbErrorNotifier.notifyError(error);
+                }
             }
             return state;
         }
@@ -70,33 +102,49 @@ namespace ChocolateFactory.DAL.Repositories
             bool state = false;
             using (var connection = DBConnection.Instance.Connection)
             {
-                string UPDATE_ORDER = $"UPDATE orders SET {Properties.DBTablesNames.Orders.Contractor}='{order.IdContractor}', " +
-                    $"{Properties.DBTablesNames.Orders.OrderDate}='{order.OrderDate}', " +
-                    $"{Properties.DBTablesNames.Orders.Amount}={order.Amount} WHERE id_o={order.Id}";
+                string UPDATE_ORDER = $"UPDATE `{Properties.DBTablesNames.Orders.TableName}` SET `{Properties.DBTablesNames.Orders.Contractor}`={order.IdContractor}, " +
+                    $"`{Properties.DBTablesNames.Orders.OrderDate}`={order.OrderDate}, " +
+                    $"`{Properties.DBTablesNames.Orders.Amount}`={order.Amount} WHERE `{Properties.DBTablesNames.Orders.Id}`={order.Id}";
 
                 MySqlCommand command = new MySqlCommand(UPDATE_ORDER, connection);
-                connection.Open();
-                var n = command.ExecuteNonQuery();
-                if (n == 1) state = true;
+                
+                try
+                {
+                    connection.Open();
+                    var n = command.ExecuteNonQuery();
+                    if (n == 1) state = true;
 
-                connection.Close();
+                    connection.Close();
+                }
+                catch (Exception error)
+                {
+                    Model.DbErrorNotifier.notifyError(error);
+                }
             }
             return state;
         }
 
-        public static bool DeleteOrder(sbyte idOrder)
+        public static bool DeleteOrder(int idOrder)
         {
             bool state = false;
             using (var connection = DBConnection.Instance.Connection)
             {
-                string DELETE_ORDER = $"DELETE FROM orders WHERE id={idOrder}";
+                string DELETE_ORDER = $"DELETE FROM `{Properties.DBTablesNames.Orders.TableName}` WHERE `{Properties.DBTablesNames.Orders.Id}`={idOrder}";
 
                 MySqlCommand command = new MySqlCommand(DELETE_ORDER, connection);
-                connection.Open();
-                var n = command.ExecuteNonQuery();
-                if (n == 1) state = true;
+                
+                try
+                {
+                    connection.Open();
+                    var n = command.ExecuteNonQuery();
+                    if (n == 1) state = true;
 
-                connection.Close();
+                    connection.Close();
+                }
+                catch (Exception error)
+                {
+                    Model.DbErrorNotifier.notifyError(error);
+                }
             }
             return state;
         }

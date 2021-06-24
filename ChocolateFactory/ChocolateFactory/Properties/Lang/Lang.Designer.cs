@@ -61,6 +61,33 @@ namespace ChocolateFactory.Properties.Lang {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu An error occurred while connecting to the database..
+        /// </summary>
+        public static string ErrorMessageContent {
+            get {
+                return ResourceManager.GetString("ErrorMessageContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Error details:.
+        /// </summary>
+        public static string ErrorMessageContentDetails {
+            get {
+                return ResourceManager.GetString("ErrorMessageContentDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Error.
+        /// </summary>
+        public static string TitleErrorMessageBox {
+            get {
+                return ResourceManager.GetString("TitleErrorMessageBox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Chocolate Factory.
         /// </summary>
         public static string TitleMainWindow {

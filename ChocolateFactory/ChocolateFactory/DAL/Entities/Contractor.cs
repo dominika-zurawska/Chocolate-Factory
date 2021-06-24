@@ -12,10 +12,10 @@ namespace ChocolateFactory.DAL.Entities
 
         #region Attributes
 
-        public sbyte? Id { get; set; }
+        public int? Id { get; set; }
         public string Name { get; set; }
         public string NIP { get; set; }
-        public sbyte? IdAddress { get; set; }
+        public int? IdAddress { get; set; }
 
         #endregion
 
@@ -27,10 +27,10 @@ namespace ChocolateFactory.DAL.Entities
         // creating an object based on MySqlDataReader
         public Contractor(MySqlDataReader reader)
         {
-            Id = sbyte.Parse(reader[Properties.DBTablesNames.Contractors.Id].ToString());
+            Id = int.Parse(reader[Properties.DBTablesNames.Contractors.Id].ToString());
             Name = reader[Properties.DBTablesNames.Contractors.Name].ToString();
             NIP = reader[Properties.DBTablesNames.Contractors.TaxIdentificationNumber].ToString();
-            IdAddress = sbyte.Parse(reader[Properties.DBTablesNames.Contractors.Address].ToString());
+            IdAddress = int.Parse(reader[Properties.DBTablesNames.Contractors.Address].ToString());
         }
 
         // creating object not yet added to the database with id = null

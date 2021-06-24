@@ -117,6 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ErrorMessageContent" xml:space="preserve">
+    <value>Wystąpił błąd przy połączeniu z bazą danych.</value>
+  </data>
+  <data name="ErrorMessageContentDetails" xml:space="preserve">
+    <value>Sczegóły błędu:</value>
+  </data>
+  <data name="TitleErrorMessageBox" xml:space="preserve">
+    <value>Błąd</value>
+  </data>
   <data name="TitleMainWindow" xml:space="preserve">
     <value>Fabryka Czekolady</value>
   </data>

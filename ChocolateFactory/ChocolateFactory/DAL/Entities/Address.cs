@@ -11,7 +11,7 @@ namespace ChocolateFactory.DAL.Entities
     {
         #region Attributes
 
-        public sbyte? Id { get; set; }
+        public int? Id { get; set; }
         public string City { get; set; }
         public string Street { get; set; }
         public string HouseNumber { get; set; }
@@ -29,7 +29,7 @@ namespace ChocolateFactory.DAL.Entities
         // creating an object based on MySqlDataReader
         public Address(MySqlDataReader reader)
         {
-            Id = sbyte.Parse(reader[Properties.DBTablesNames.Addresses.Id].ToString());
+            Id = int.Parse(reader[Properties.DBTablesNames.Addresses.Id].ToString());
             City = reader[Properties.DBTablesNames.Addresses.City].ToString();
             Street = reader[Properties.DBTablesNames.Addresses.Street].ToString();
             HouseNumber = reader[Properties.DBTablesNames.Addresses.HouseNumber].ToString();

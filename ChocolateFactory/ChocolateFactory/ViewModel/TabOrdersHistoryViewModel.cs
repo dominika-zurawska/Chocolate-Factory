@@ -70,7 +70,7 @@ namespace ChocolateFactory.ViewModel
                     openWindowOrderDetails = new RelayCommand(
                         arg =>
                         {
-                            OrderDetailsVM = new OrderDetailsViewModel(model, orderManager, (sbyte)orders[OrderSelectedIndex].Id);
+                            OrderDetailsVM = new OrderDetailsViewModel(model, orderManager, (int)orders[OrderSelectedIndex].Id);
 
                             var orderDetails = new View.OrderDetails(OrderDetailsVM);
                         },
@@ -90,7 +90,7 @@ namespace ChocolateFactory.ViewModel
                     repeatOrder = new RelayCommand(
                         arg =>
                         {
-                            orderManager.RepeatOrder((sbyte)orders[OrderSelectedIndex].Id);
+                            orderManager.RepeatOrder((int)orders[OrderSelectedIndex].Id);
                         },
                         arg => OrderSelectedIndex != -1
                         );
