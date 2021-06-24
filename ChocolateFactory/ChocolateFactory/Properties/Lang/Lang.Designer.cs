@@ -142,6 +142,15 @@ namespace ChocolateFactory.Properties.Lang {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu / .
+        /// </summary>
+        public static string House_Flat {
+            get {
+                return ResourceManager.GetString("House/Flat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu ADDRESS:.
         /// </summary>
         public static string LabelAddress {
@@ -282,6 +291,24 @@ namespace ChocolateFactory.Properties.Lang {
         public static string LabelWholeAmount {
             get {
                 return ResourceManager.GetString("LabelWholeAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Hidden.
+        /// </summary>
+        public static string TabHidden {
+            get {
+                return ResourceManager.GetString("TabHidden", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Visible.
+        /// </summary>
+        public static string TabVisible {
+            get {
+                return ResourceManager.GetString("TabVisible", resourceCulture);
             }
         }
         

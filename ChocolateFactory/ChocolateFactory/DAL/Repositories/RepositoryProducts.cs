@@ -65,17 +65,43 @@ namespace ChocolateFactory.DAL.Repositories
             return product;
         }
 
-        public static bool InsertProduct(Address address)
+        public static bool InsertProduct(Product product)
         {
             return true;
         }
 
-        public static bool UpdateProduct(Address address)
+        public static bool UpdateProduct(Product product)
         {
             return true;
         }
 
-        public static bool DeleteProduct(int idAddress)
+        public static bool UpdateProductQuantity(Product product)
+        {
+            bool state = false;
+            using (var connection = DBConnection.Instance.Connection)
+            {
+                string UPDATE_PRODUCT = $"UPDATE `{Properties.DBTablesNames.Products.TableName}` SET `{Properties.DBTablesNames.Products.Quantity}`={product.Quantity}" +
+                    $" WHERE `{Properties.DBTablesNames.Products.Id}`={product.Id}";
+
+                MySqlCommand command = new MySqlCommand(UPDATE_PRODUCT, connection);
+
+                try
+                {
+                    connection.Open();
+                    var n = command.ExecuteNonQuery();
+                    if (n == 1) state = true;
+
+                    connection.Close();
+                }
+                catch (Exception error)
+                {
+                    Model.DbErrorNotifier.notifyError(error);
+                }
+            }
+            return state;
+        }
+
+        public static bool DeleteProduct(int idProduct)
         {
             return true;
         }

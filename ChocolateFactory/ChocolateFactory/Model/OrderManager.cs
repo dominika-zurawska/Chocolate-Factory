@@ -33,10 +33,11 @@ namespace ChocolateFactory.Model
 
         internal void AddPosition(Product product, int quantity, ObservableCollection<Product> productsList)
         {
-            product.Quantity = quantity;
-            if (!productsList.Contains(product))
+            Product newProduct = new Product(product);
+            newProduct.Quantity = quantity;
+            if (!productsList.Contains(newProduct))
             {
-                productsList.Add(product);
+                productsList.Add(newProduct);
             }
         }
 
@@ -77,6 +78,23 @@ namespace ChocolateFactory.Model
                 OrderPosition newOrderPosition = new OrderPosition((int)newOrder.Id, (int)product.Id, product.Quantity);
                 RepositoryOrderPositions.InsertOrderPosition(newOrderPosition);
             }
+
+            // reduce the stock level of ordered products
+            foreach (Product product in productsList)
+            {
+                int newQuantity = model.Products[(int)product.Id-1].Quantity - product.Quantity;
+                Product newProduct = new Product(product);
+                newProduct.Quantity = newQuantity;
+                RepositoryProducts.UpdateProductQuantity(newProduct);
+            }
+
+            // get new products data from database
+            model.Products = null;
+            model.Products = new ObservableCollection<Product>();
+            var products = RepositoryProducts.GetAllProducts();
+            foreach (var p in products)
+                model.Products.Add(p);
+
         }
 
         internal void ShowDetails(int orderId, ref Order orderData, ref Contractor contractorData, ref Address addressData, ref ObservableCollection<Product> orderProductsData)
@@ -129,5 +147,15 @@ namespace ChocolateFactory.Model
             // re-order
             SubmitOrder(contractor, productsList);
         }
+
+        internal decimal CountAmount(ObservableCollection<Product> productsList) 
+        {
+            decimal amount = 0;
+            foreach (Product p in productsList) {
+                amount = (decimal)p.PricePerUnit * (decimal)p.Quantity;
+            }
+            return amount;
+        }
+
     }
 }

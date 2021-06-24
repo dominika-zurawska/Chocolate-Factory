@@ -192,6 +192,10 @@ namespace ChocolateFactory.ViewModel
             Street = AddressData.Street;
             HouseNumber = AddressData.HouseNumber;
             FlatNumber = AddressData.FlatNumber;
+            if (!string.IsNullOrWhiteSpace(AddressData.FlatNumber))
+            {
+                FlatNumber = $"{Properties.Lang.Lang.House_Flat}" + AddressData.FlatNumber;
+            }
             PostalCode = AddressData.PostalCode;
             Date = OrderData.OrderDate;
             Amount = OrderData.Amount;

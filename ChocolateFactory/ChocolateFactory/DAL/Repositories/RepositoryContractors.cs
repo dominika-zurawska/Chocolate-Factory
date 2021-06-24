@@ -66,17 +66,17 @@ namespace ChocolateFactory.DAL.Repositories
 
 
 
-        public static bool InsertContractor(Address address)
+        public static bool InsertContractor(Contractor contractor)
         {
             return true;
         }
 
-        public static bool UpdateContractor(Address address)
+        public static bool UpdateContractor(Contractor contractor)
         {
             return true;
         }
 
-        public static bool DeleteContractor(int idAddress)
+        public static bool DeleteContractor(int idContractor)
         {
             return true;
         }

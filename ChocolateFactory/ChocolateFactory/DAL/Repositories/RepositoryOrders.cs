@@ -104,7 +104,7 @@ namespace ChocolateFactory.DAL.Repositories
             {
                 string UPDATE_ORDER = $"UPDATE `{Properties.DBTablesNames.Orders.TableName}` SET `{Properties.DBTablesNames.Orders.Contractor}`={order.IdContractor}, " +
                     $"`{Properties.DBTablesNames.Orders.OrderDate}`={order.OrderDate}, " +
-                    $"`{Properties.DBTablesNames.Orders.Amount}`={order.Amount} WHERE `{Properties.DBTablesNames.Orders.Id}`={order.Id}";
+                    $"`{Properties.DBTablesNames.Orders.Amount}`={order.Amount} WHERE {Properties.DBTablesNames.Orders.Id}={order.Id}";
 
                 MySqlCommand command = new MySqlCommand(UPDATE_ORDER, connection);
                 

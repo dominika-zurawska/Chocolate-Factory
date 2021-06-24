@@ -24,30 +24,47 @@
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0" Orientation="Horizontal">
                         <StackPanel Orientation="Vertical">
+                            <RadioButton GroupName="UserType" Foreground="Green" IsChecked="{Binding  TabOrderVM.SelectedAdmin, Mode=TwoWay}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Checked">
+                                        <i:InvokeCommandAction Command="{Binding TabOrderVM.SetVisibility}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                Admin
+                            </RadioButton>
+                            <RadioButton GroupName="UserType" Foreground="Red" IsChecked="{Binding  TabOrderVM.SelectedUser, Mode=TwoWay}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Checked">
+                                        <i:InvokeCommandAction Command="{Binding TabOrderVM.SetVisibility}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                User
+                            </RadioButton>
                             <Label Content="{x:Static lang:Lang.LabelContractor}" Width="100" Height="30" Margin="0,10"></Label>
                             <Label Content="{x:Static lang:Lang.LabelProduct}" Width="100" Height="30" Margin="0,10"></Label>
                             <Label Content="{x:Static lang:Lang.LabelAmount}" Width="100" Height="30" Margin="0,10"></Label>
                         </StackPanel>
                         <StackPanel Orientation="Vertical">
-                            <ComboBox Name="CbContractor" Height="30" Margin="0,10" FontSize="17"
+                            <ComboBox Name="CbContractor" Height="30" Margin="0,40,0,10" FontSize="17"
                                       ItemsSource="{Binding TabOrderVM.Contractors, Mode=TwoWay}"
                                       SelectedItem="{Binding TabOrderVM.SelectedContractor, Mode=TwoWay}"
                                       >
                             </ComboBox>
                             <ComboBox Name="CbProduct" Height="30" Margin="0,10" FontSize="17"
-                                      ItemsSource="{Binding TabOrderVM.Products, Mode=TwoWay}"
+                                      ItemsSource="{Binding TabOrderVM.Products, Mode=TwoWay, 
+                                        UpdateSourceTrigger=PropertyChanged}"
                                       SelectedItem="{Binding TabOrderVM.SelectedProduct, Mode=TwoWay}"
                                       >
                             </ComboBox>
                             <StackPanel Orientation="Horizontal" Width="220">
-                                <Slider Name="sQuantity"  Width="170" Height="30" Margin="0,10" Minimum="0" 
-                                        Maximum="999"
-                                        Value="{Binding TabOrderVM.Quantity, Mode=TwoWay}"
+                                <Slider Name="sQuantity"  Width="170" Height="30" Margin="0,14,0,10" Minimum="0" 
+                                        Maximum="{Binding TabOrderVM.SelectedProduct.Quantity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        Value="{Binding TabOrderVM.Quantity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         >
                                     
                                 </Slider>
-                                <Label Name="lblQuantity" Content="{Binding TabOrderVM.Quantity, Mode=TwoWay}" Margin="0,5"></Label>
-                                <Label Name="lblUnit" Content="{x:Static lang:Lang.LabelUnit}" Margin="0,5"></Label>
+                                <Label Name="lblQuantity" Content="{Binding TabOrderVM.Quantity, Mode=TwoWay}" Margin="0,10,0,5"></Label>
+                                <Label Name="lblUnit" Content="{Binding TabOrderVM.SelectedProduct.Unit, Mode=TwoWay}" Margin="0,10,0,5"></Label>
                             </StackPanel>
 
                             <Button Name="btnAdd" Content="{x:Static lang:Lang.ButtonAddPosition}" Margin="0,10" Command="{Binding TabOrderVM.AddProductToList}" ></Button>
@@ -84,12 +101,12 @@
                         </ListView>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="{x:Static lang:Lang.LabelSum}" Margin="20,0, 200,0"></Label>
-                            <Label Name="lblAmount" Content="{x:Static lang:Lang.LabelWholeAmount}"></Label>
+                            <Label Name="lblAmount" Content="{Binding TabOrderVM.Amount, Mode=TwoWay}"></Label>
                         </StackPanel>
                     </StackPanel>
                 </Grid>
             </TabItem>
-            <TabItem Header="{x:Static lang:Lang.TitleOrdersHistory}">
+            <TabItem Header="{x:Static lang:Lang.TitleOrdersHistory}" Visibility="{Binding TabOrderVM.TabVisible}">
                 <Grid>
                     <StackPanel Orientation="Vertical">
                         <ListView Name="lvOrders" Width="550" Height="370" Margin="0,10"

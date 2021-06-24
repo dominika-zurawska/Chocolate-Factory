@@ -20,12 +20,16 @@ namespace ChocolateFactory.ViewModel
         private OrderManager orderManager = null;
         private ObservableCollection<Contractor> contractors = null;
         private ObservableCollection<Product> products = null;
+        private decimal amount = 0;
 
         private Contractor selectedContractor;
         private Product selectedProduct;
         private ObservableCollection<Product> productsList = new ObservableCollection<Product>();
         private int productsListSelectedIndex = -1;
         private int quantity;
+        private bool selectedAdmin;
+        private bool selectedUser;
+        private string tabVisible = $"{Properties.Lang.Lang.TabVisible}";
 
         #endregion
 
@@ -112,6 +116,46 @@ namespace ChocolateFactory.ViewModel
             }
         }
 
+        public string TabVisible
+        {
+            get { return tabVisible; }
+            set
+            {
+                tabVisible = value;
+                onPropertyChanged(nameof(TabVisible));
+            }
+        }
+
+
+        public decimal Amount
+        {
+            get { return amount; }
+            set
+            {
+                amount = value;
+                onPropertyChanged(nameof(Amount));
+            }
+        }
+
+        public bool SelectedAdmin
+        {
+            get { return selectedAdmin; }
+            set
+            {
+                selectedAdmin = value;
+                onPropertyChanged(nameof(SelectedAdmin));
+            }
+        }
+        public bool SelectedUser
+        {
+            get { return selectedUser; }
+            set
+            {
+                selectedUser = value;
+                onPropertyChanged(nameof(SelectedUser));
+            }
+        }
+
 
         #endregion
 
@@ -128,7 +172,8 @@ namespace ChocolateFactory.ViewModel
                     addProductToList = new RelayCommand(
                         arg =>
                         {
-                           orderManager.AddPosition(SelectedProduct, Quantity, ProductsList);
+                            orderManager.AddPosition(SelectedProduct, Quantity, ProductsList);
+                            Amount = orderManager.CountAmount(ProductsList);
                         },
                         arg => SelectedProduct != null && Quantity > 0
                         );
@@ -147,6 +192,7 @@ namespace ChocolateFactory.ViewModel
                         arg =>
                         {
                             orderManager.DeletePosition(ProductsList, ProductsListSelectedIndex);
+                            Amount = orderManager.CountAmount(ProductsList);
                         },
                         arg => ProductsListSelectedIndex > -1
                         );
@@ -164,9 +210,8 @@ namespace ChocolateFactory.ViewModel
                     loadItemToForm = new RelayCommand(
                         arg =>
                         {
-                            SelectedProduct = ProductsList[ProductsListSelectedIndex];
+                            SelectedProduct = Products[ProductsListSelectedIndex]; 
                             Quantity = ProductsList[ProductsListSelectedIndex].Quantity;
-                            
                         },
                         arg => ProductsListSelectedIndex > -1
                         );
@@ -184,7 +229,8 @@ namespace ChocolateFactory.ViewModel
                     editProductOnList = new RelayCommand(
                         arg =>
                         {
-                            ProductsList[ProductsListSelectedIndex] = orderManager.EditPosition(ProductsList, ProductsListSelectedIndex, SelectedProduct, Quantity);           
+                            ProductsList[ProductsListSelectedIndex] = orderManager.EditPosition(ProductsList, ProductsListSelectedIndex, SelectedProduct, Quantity);
+                            Amount = orderManager.CountAmount(ProductsList);
                         },
                         arg => ProductsListSelectedIndex > -1 && Quantity > 0 && Quantity != ProductsList[ProductsListSelectedIndex].Quantity
                         );
@@ -205,11 +251,34 @@ namespace ChocolateFactory.ViewModel
                             orderManager.SubmitOrder(SelectedContractor, ProductsList);
                             ProductsListSelectedIndex = -1;
                             ProductsList = new ObservableCollection<Product>();
+                            Amount = 0;
+                            Products = model.Products;
                         },
                         arg => SelectedContractor != null && ProductsList.Count > 0
                         );
 
                 return submitOrder;
+            }
+        }
+
+        private ICommand setVisibility = null;
+        public ICommand SetVisibility
+        {
+            get
+            {
+                return setVisibility ?? (setVisibility = new RelayCommand(
+                    (p) =>
+                    {
+                        if (SelectedUser)
+                        {
+                            TabVisible = $"{Properties.Lang.Lang.TabHidden}";
+                        }
+                        else
+                        {
+                            TabVisible = $"{Properties.Lang.Lang.TabVisible}";
+                        }
+                    }
+                    , p => true));
             }
         }
 
