@@ -61,6 +61,69 @@ namespace ChocolateFactory.Properties.Lang {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Add position.
+        /// </summary>
+        public static string ButtonAddPosition {
+            get {
+                return ResourceManager.GetString("ButtonAddPosition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Remove position.
+        /// </summary>
+        public static string ButtonDeletePosition {
+            get {
+                return ResourceManager.GetString("ButtonDeletePosition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Edit position.
+        /// </summary>
+        public static string ButtonEditPosition {
+            get {
+                return ResourceManager.GetString("ButtonEditPosition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Print.
+        /// </summary>
+        public static string ButtonPrint {
+            get {
+                return ResourceManager.GetString("ButtonPrint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Repeat order.
+        /// </summary>
+        public static string ButtonRepeatOrder {
+            get {
+                return ResourceManager.GetString("ButtonRepeatOrder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Show order details.
+        /// </summary>
+        public static string ButtonShowOrderDetails {
+            get {
+                return ResourceManager.GetString("ButtonShowOrderDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu SubmitOrder.
+        /// </summary>
+        public static string ButtonSubmitOrder {
+            get {
+                return ResourceManager.GetString("ButtonSubmitOrder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu An error occurred while connecting to the database..
         /// </summary>
         public static string ErrorMessageContent {
@@ -75,6 +138,150 @@ namespace ChocolateFactory.Properties.Lang {
         public static string ErrorMessageContentDetails {
             get {
                 return ResourceManager.GetString("ErrorMessageContentDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu ADDRESS:.
+        /// </summary>
+        public static string LabelAddress {
+            get {
+                return ResourceManager.GetString("LabelAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Amount.
+        /// </summary>
+        public static string LabelAmount {
+            get {
+                return ResourceManager.GetString("LabelAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Amount.
+        /// </summary>
+        public static string LabelAmount2 {
+            get {
+                return ResourceManager.GetString("LabelAmount2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Amount to be paid:.
+        /// </summary>
+        public static string LabelAmountToBePaid {
+            get {
+                return ResourceManager.GetString("LabelAmountToBePaid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu BUYER.
+        /// </summary>
+        public static string LabelBuyer {
+            get {
+                return ResourceManager.GetString("LabelBuyer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Chocolate Factory.
+        /// </summary>
+        public static string LabelCompanyName {
+            get {
+                return ResourceManager.GetString("LabelCompanyName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Contractor.
+        /// </summary>
+        public static string LabelContractor {
+            get {
+                return ResourceManager.GetString("LabelContractor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Date.
+        /// </summary>
+        public static string LabelDate {
+            get {
+                return ResourceManager.GetString("LabelDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Name.
+        /// </summary>
+        public static string LabelName {
+            get {
+                return ResourceManager.GetString("LabelName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Number.
+        /// </summary>
+        public static string LabelNumber {
+            get {
+                return ResourceManager.GetString("LabelNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Price.
+        /// </summary>
+        public static string LabelPrice {
+            get {
+                return ResourceManager.GetString("LabelPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Product.
+        /// </summary>
+        public static string LabelProduct {
+            get {
+                return ResourceManager.GetString("LabelProduct", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Sum:.
+        /// </summary>
+        public static string LabelSum {
+            get {
+                return ResourceManager.GetString("LabelSum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu units.
+        /// </summary>
+        public static string LabelUnit {
+            get {
+                return ResourceManager.GetString("LabelUnit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu VENDOR:.
+        /// </summary>
+        public static string LabelVendor {
+            get {
+                return ResourceManager.GetString("LabelVendor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Whole amount:.
+        /// </summary>
+        public static string LabelWholeAmount {
+            get {
+                return ResourceManager.GetString("LabelWholeAmount", resourceCulture);
             }
         }
         
@@ -97,11 +304,29 @@ namespace ChocolateFactory.Properties.Lang {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Orders.
+        /// </summary>
+        public static string TitleOrder {
+            get {
+                return ResourceManager.GetString("TitleOrder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Order Details.
         /// </summary>
         public static string TitleOrderDetailsWindow {
             get {
                 return ResourceManager.GetString("TitleOrderDetailsWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu Orders history.
+        /// </summary>
+        public static string TitleOrdersHistory {
+            get {
+                return ResourceManager.GetString("TitleOrdersHistory", resourceCulture);
             }
         }
     }

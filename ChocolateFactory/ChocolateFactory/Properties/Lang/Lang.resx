@@ -117,11 +117,80 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ButtonAddPosition" xml:space="preserve">
+    <value>Add position</value>
+  </data>
+  <data name="ButtonDeletePosition" xml:space="preserve">
+    <value>Remove position</value>
+  </data>
+  <data name="ButtonEditPosition" xml:space="preserve">
+    <value>Edit position</value>
+  </data>
+  <data name="ButtonPrint" xml:space="preserve">
+    <value>Print</value>
+  </data>
+  <data name="ButtonRepeatOrder" xml:space="preserve">
+    <value>Repeat order</value>
+  </data>
+  <data name="ButtonShowOrderDetails" xml:space="preserve">
+    <value>Show order details</value>
+  </data>
+  <data name="ButtonSubmitOrder" xml:space="preserve">
+    <value>SubmitOrder</value>
+  </data>
   <data name="ErrorMessageContent" xml:space="preserve">
     <value>An error occurred while connecting to the database.</value>
   </data>
   <data name="ErrorMessageContentDetails" xml:space="preserve">
     <value>Error details:</value>
+  </data>
+  <data name="LabelAddress" xml:space="preserve">
+    <value>ADDRESS:</value>
+  </data>
+  <data name="LabelAmount" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="LabelAmount2" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="LabelAmountToBePaid" xml:space="preserve">
+    <value>Amount to be paid:</value>
+  </data>
+  <data name="LabelBuyer" xml:space="preserve">
+    <value>BUYER</value>
+  </data>
+  <data name="LabelCompanyName" xml:space="preserve">
+    <value>Chocolate Factory</value>
+  </data>
+  <data name="LabelContractor" xml:space="preserve">
+    <value>Contractor</value>
+  </data>
+  <data name="LabelDate" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="LabelName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="LabelNumber" xml:space="preserve">
+    <value>Number</value>
+  </data>
+  <data name="LabelPrice" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="LabelProduct" xml:space="preserve">
+    <value>Product</value>
+  </data>
+  <data name="LabelSum" xml:space="preserve">
+    <value>Sum:</value>
+  </data>
+  <data name="LabelUnit" xml:space="preserve">
+    <value>units</value>
+  </data>
+  <data name="LabelVendor" xml:space="preserve">
+    <value>VENDOR:</value>
+  </data>
+  <data name="LabelWholeAmount" xml:space="preserve">
+    <value>Whole amount:</value>
   </data>
   <data name="TitleErrorMessageBox" xml:space="preserve">
     <value>Error</value>
@@ -129,7 +198,13 @@
   <data name="TitleMainWindow" xml:space="preserve">
     <value>Chocolate Factory</value>
   </data>
+  <data name="TitleOrder" xml:space="preserve">
+    <value>Orders</value>
+  </data>
   <data name="TitleOrderDetailsWindow" xml:space="preserve">
     <value>Order Details</value>
+  </data>
+  <data name="TitleOrdersHistory" xml:space="preserve">
+    <value>Orders history</value>
   </data>
 </root>

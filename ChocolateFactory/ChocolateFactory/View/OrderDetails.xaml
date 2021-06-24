@@ -24,7 +24,7 @@
                     <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Vertical" MinWidth="748" Name="SpHead">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                            <Label HorizontalAlignment="Right" VerticalAlignment="Center" Content="Data "></Label>
+                                <Label HorizontalAlignment="Right" VerticalAlignment="Center" Content="{x:Static lang:Lang.LabelDate}"></Label>
                             <Label HorizontalAlignment="Right" VerticalAlignment="Center" Name="LbDate" Content="{Binding Date, Mode=OneWay}"></Label>
                         </StackPanel>
                     </StackPanel>
@@ -32,8 +32,8 @@
                     <StackPanel Orientation="Horizontal">
                         <StackPanel Orientation="Horizontal" Name="SpSupplier">
                             <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Width="400">
-                                <Label Content="SPRZEDAWCA:" FontSize="13"></Label>
-                                <Label Content="Fabryka czekolady"></Label>
+                                    <Label Content="{x:Static lang:Lang.LabelVendor}" FontSize="13"></Label>
+                                    <Label Content="{x:Static lang:Lang.LabelCompanyName}"></Label>
                             </StackPanel>
                         </StackPanel>
 
@@ -41,7 +41,7 @@
                         <StackPanel Orientation="Vertical" Name="SpBuyer">
 
                             <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
-                                <Label Content="NABYWCA:" FontSize="15"></Label>
+                                    <Label Content="{x:Static lang:Lang.LabelBuyer}" FontSize="15"></Label>
                                 <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
                                         <Label Name="lblId" FontSize="15" Content="{Binding ContractorId, Mode=OneWay}"></Label>
                                         <Label Name="lblName" FontSize="15" Content="{Binding ContractorName, Mode=OneWay}"></Label>
@@ -51,7 +51,7 @@
                             <StackPanel Orientation="Vertical">
                                 <StackPanel Orientation="Horizontal">
                                     <StackPanel Orientation="Vertical"  MinWidth="45">
-                                        <Label Content="ADRES:" FontSize="15"></Label>
+                                            <Label Content="{x:Static lang:Lang.LabelAddress}" FontSize="15"></Label>
                                     </StackPanel>
                                 </StackPanel>
                                 <StackPanel Orientation="Vertical">
@@ -73,10 +73,10 @@
                                   ItemsSource="{Binding OrderProductsData, Mode=OneWay}">
                                 <ListView.View>
                                 <GridView>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Header="Nazwa" Width="415"/>
-                                        <GridViewColumn DisplayMemberBinding="{Binding Path=Unit}" Header="j.m." Width="115"/>
-                                        <GridViewColumn DisplayMemberBinding="{Binding Path=Quantity}" Header="Ilość" Width="115"/>
-                                        <GridViewColumn DisplayMemberBinding="{Binding Path=PricePerUnit}" Header="Cena" Width="115"/>
+                                        <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Header="{x:Static lang:Lang.LabelName}" Width="415"/>
+                                        <GridViewColumn DisplayMemberBinding="{Binding Path=Unit}" Header="{x:Static lang:Lang.LabelUnit}" Width="115"/>
+                                        <GridViewColumn DisplayMemberBinding="{Binding Path=Quantity}" Header="{x:Static lang:Lang.LabelAmount}" Width="115"/>
+                                        <GridViewColumn DisplayMemberBinding="{Binding Path=PricePerUnit}" Header="{x:Static lang:Lang.LabelPrice}" Width="115"/>
                                 </GridView>
                             </ListView.View>
                         </ListView>
@@ -87,13 +87,13 @@
                         <StackPanel HorizontalAlignment="Right"  Width="450">
                             <StackPanel Orientation="Horizontal">
                                 <StackPanel>
-                                        <Label HorizontalAlignment="Right" Content="Do zapłaty:" FontSize="13"></Label>
+                                        <Label HorizontalAlignment="Right" Content="{x:Static lang:Lang.LabelAmountToBePaid}" FontSize="13"></Label>
                                         <Label Name="lblSum" HorizontalAlignment="Right" FontSize="13" Content="{Binding Amount, Mode=OneWay}"></Label>
                                 </StackPanel>
                             </StackPanel>
                         </StackPanel>
                     </StackPanel>
-                        <Button Content="Drukuj" Height="30" x:Name="butttonPrint" Command="{Binding PrintOrder}"></Button>
+                        <Button Content="{x:Static lang:Lang.ButtonPrint}" Height="30" x:Name="butttonPrint" Command="{Binding PrintOrder}"></Button>
                     </StackPanel>
                 </Paragraph>
             </FlowDocument>

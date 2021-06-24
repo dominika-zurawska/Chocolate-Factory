@@ -16,7 +16,7 @@
 
     <Grid DataContext="{StaticResource mainVM}">
         <TabControl>
-            <TabItem Header="Zamówienie">
+            <TabItem Header="{x:Static lang:Lang.TitleOrder}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
@@ -24,9 +24,9 @@
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0" Orientation="Horizontal">
                         <StackPanel Orientation="Vertical">
-                            <Label Content="Kontrahent" Width="100" Height="30" Margin="0,10"></Label>
-                            <Label Content="Produkt" Width="100" Height="30" Margin="0,10"></Label>
-                            <Label Content="Ilość" Width="100" Height="30" Margin="0,10"></Label>
+                            <Label Content="{x:Static lang:Lang.LabelContractor}" Width="100" Height="30" Margin="0,10"></Label>
+                            <Label Content="{x:Static lang:Lang.LabelProduct}" Width="100" Height="30" Margin="0,10"></Label>
+                            <Label Content="{x:Static lang:Lang.LabelAmount}" Width="100" Height="30" Margin="0,10"></Label>
                         </StackPanel>
                         <StackPanel Orientation="Vertical">
                             <ComboBox Name="CbContractor" Height="30" Margin="0,10" FontSize="17"
@@ -47,13 +47,13 @@
                                     
                                 </Slider>
                                 <Label Name="lblQuantity" Content="{Binding TabOrderVM.Quantity, Mode=TwoWay}" Margin="0,5"></Label>
-                                <Label Name="lblUnit" Content="j.m." Margin="0,5"></Label>
+                                <Label Name="lblUnit" Content="{x:Static lang:Lang.LabelUnit}" Margin="0,5"></Label>
                             </StackPanel>
 
-                            <Button Name="btnAdd" Content="Dodaj pozycję" Margin="0,10" Command="{Binding TabOrderVM.AddProductToList}" ></Button>
-                            <Button Name="btnEdit" Content="Edytuj pozycję" Margin="0,10" Command="{Binding TabOrderVM.EditProductOnList}"></Button>
-                            <Button Name="btnDelete" Content="Usuń pozycję" Margin="0,10" Command="{Binding TabOrderVM.DeleteProductFromList}"></Button>
-                            <Button Name="btnSubmitOrder" Content="Złóż zamówienie" Margin="0,10" Command="{Binding TabOrderVM.SubmitOrder}"></Button>
+                            <Button Name="btnAdd" Content="{x:Static lang:Lang.ButtonAddPosition}" Margin="0,10" Command="{Binding TabOrderVM.AddProductToList}" ></Button>
+                            <Button Name="btnEdit" Content="{x:Static lang:Lang.ButtonEditPosition}" Margin="0,10" Command="{Binding TabOrderVM.EditProductOnList}"></Button>
+                            <Button Name="btnDelete" Content="{x:Static lang:Lang.ButtonDeletePosition}" Margin="0,10" Command="{Binding TabOrderVM.DeleteProductFromList}"></Button>
+                            <Button Name="btnSubmitOrder" Content="{x:Static lang:Lang.ButtonSubmitOrder}" Margin="0,10" Command="{Binding TabOrderVM.SubmitOrder}"></Button>
                             <StackPanel>
                                 <Button Content="EditSave" Width="110" Margin="0,0,10,0"  Name="btnSaveEdit" Visibility="Hidden"></Button>
                                 <Button Content="Cancel" Width="110"  Name="btnCancelEdit" Visibility="Hidden"></Button>
@@ -69,10 +69,10 @@
 
                             <ListView.View>
                                 <GridView>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Header="Nazwa"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Unit}" Header="j.m."/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Quantity}" Header="Ilość"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=PricePerUnit}" Header="Cena"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Header="{x:Static lang:Lang.LabelName}"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Unit}" Header="{x:Static lang:Lang.LabelUnit}"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Quantity}" Header="{x:Static lang:Lang.LabelAmount}"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=PricePerUnit}" Header="{x:Static lang:Lang.LabelPrice}"/>
                                 </GridView>
                             </ListView.View>
 
@@ -83,13 +83,13 @@
                             </i:Interaction.Triggers>
                         </ListView>
                         <StackPanel Orientation="Horizontal">
-                            <Label Content="Suma:" Margin="20,0, 200,0"></Label>
-                            <Label Name="lblAmount" Content="cała kwota"></Label>
+                            <Label Content="{x:Static lang:Lang.LabelSum}" Margin="20,0, 200,0"></Label>
+                            <Label Name="lblAmount" Content="{x:Static lang:Lang.LabelWholeAmount}"></Label>
                         </StackPanel>
                     </StackPanel>
                 </Grid>
             </TabItem>
-            <TabItem Header="Historia zamówień">
+            <TabItem Header="{x:Static lang:Lang.TitleOrdersHistory}">
                 <Grid>
                     <StackPanel Orientation="Vertical">
                         <ListView Name="lvOrders" Width="550" Height="370" Margin="0,10"
@@ -98,21 +98,21 @@
                                   >
                             <ListView.View>
                                 <GridView>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Id}" Header="Numer"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=ContractorName}" Header="Kontrahent"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Amount}" Header="Kwota"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=OrderDate}" Header="Data"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Id}" Header="{x:Static lang:Lang.LabelNumber}"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=ContractorName}" Header="{x:Static lang:Lang.LabelContractor}"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Amount}" Header="{x:Static lang:Lang.LabelAmount2}"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=OrderDate}" Header="{x:Static lang:Lang.LabelDate}"/>
                                 </GridView>
                             </ListView.View>
                         </ListView>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <Button x:Name="btnDetails" Content="Podgląd zamówienia" 
+                            <Button x:Name="btnDetails" Content="{x:Static lang:Lang.ButtonShowOrderDetails}" 
                                     Margin="10,0"
                                     Command="{Binding TabOrdersHistoryVM.OpenWindowOrderDetails}"
                                     >
                                 
                             </Button>
-                            <Button Name="btnRepeat" Content="Ponów zamówienie" Margin="10,0"
+                            <Button Name="btnRepeat" Content="{x:Static lang:Lang.ButtonRepeatOrder}" Margin="10,0"
                                     Command="{Binding TabOrdersHistoryVM.RepeatOrder}"
                                     >
                                 
