@@ -46,12 +46,12 @@ namespace ChocolateFactory.Model
             productsList.RemoveAt(productsListSelectedIndex);
         }
 
-        internal Product EditPosition(ObservableCollection<Product> productsList, int productsListSelectedIndex, Product product, int quantity)
+        internal void EditPosition(ObservableCollection<Product> productsList, int productsListSelectedIndex, Product product, int quantity)
         {
             Product editedProduct = new Product(product);
             editedProduct.Quantity = quantity;
-            
-            return editedProduct;
+            productsList.RemoveAt(productsListSelectedIndex);
+            productsList.Insert(productsListSelectedIndex, editedProduct);
         }
 
         internal void SubmitOrder(Contractor contractor, ObservableCollection<Product> productsList)
@@ -152,7 +152,7 @@ namespace ChocolateFactory.Model
         {
             decimal amount = 0;
             foreach (Product p in productsList) {
-                amount = (decimal)p.PricePerUnit * (decimal)p.Quantity;
+                amount += (decimal)p.PricePerUnit * (decimal)p.Quantity;
             }
             return amount;
         }

@@ -175,7 +175,7 @@ namespace ChocolateFactory.ViewModel
                             orderManager.AddPosition(SelectedProduct, Quantity, ProductsList);
                             Amount = orderManager.CountAmount(ProductsList);
                         },
-                        arg => SelectedProduct != null && Quantity > 0
+                        arg => SelectedProduct != null && Quantity > 0 && !ProductsList.Contains(SelectedProduct)
                         );
 
                 return addProductToList;
@@ -210,7 +210,7 @@ namespace ChocolateFactory.ViewModel
                     loadItemToForm = new RelayCommand(
                         arg =>
                         {
-                            SelectedProduct = Products[ProductsListSelectedIndex]; 
+                            SelectedProduct = Products[(int)ProductsList[ProductsListSelectedIndex].Id - 1];
                             Quantity = ProductsList[ProductsListSelectedIndex].Quantity;
                         },
                         arg => ProductsListSelectedIndex > -1
@@ -229,7 +229,7 @@ namespace ChocolateFactory.ViewModel
                     editProductOnList = new RelayCommand(
                         arg =>
                         {
-                            ProductsList[ProductsListSelectedIndex] = orderManager.EditPosition(ProductsList, ProductsListSelectedIndex, SelectedProduct, Quantity);
+                            orderManager.EditPosition(ProductsList, ProductsListSelectedIndex, SelectedProduct, Quantity);
                             Amount = orderManager.CountAmount(ProductsList);
                         },
                         arg => ProductsListSelectedIndex > -1 && Quantity > 0 && Quantity != ProductsList[ProductsListSelectedIndex].Quantity
@@ -252,6 +252,9 @@ namespace ChocolateFactory.ViewModel
                             ProductsListSelectedIndex = -1;
                             ProductsList = new ObservableCollection<Product>();
                             Amount = 0;
+                            Quantity = 0;
+                            SelectedContractor = null;
+                            SelectedProduct = null;
                             Products = model.Products;
                         },
                         arg => SelectedContractor != null && ProductsList.Count > 0

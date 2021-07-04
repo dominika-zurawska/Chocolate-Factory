@@ -67,7 +67,7 @@ namespace ChocolateFactory.DAL.Entities
             if (Name.ToLower() != product.Name.ToLower()) return false;
             if (Unit.ToLower() != product.Unit.ToLower()) return false;
             if (PricePerUnit != product.PricePerUnit) return false;
-            if (Quantity != product.Quantity) return false;
+            //if (Quantity != product.Quantity) return false;
             return true;
         }
 
